@@ -1,21 +1,22 @@
 import React, {FC} from 'react';
 import '../App.css'
 import { Story } from './story';
+import { storyData } from '../storage';
 
-interface StoryListProps {
-  storyList : {
+type StoryList = {
     id : number;
     title : string;
     author : string;
     story : string;
-  }[]
-}
+}[]
 
-export const Home : FC<StoryListProps> = ({storyList}) => {
+const storyList: StoryList = storyData; 
+
+export const Home : FC = () => {
   return (
     <div className = 'App'>
       {storyList.map((story) => (
-        <Story key={story.id} story = {story} />
+        <Story key={story.id} {...story} />
       ))}
     </div>
   );
