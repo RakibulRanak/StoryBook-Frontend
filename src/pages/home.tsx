@@ -1,12 +1,22 @@
 import React, {FC} from 'react';
+import '../App.css'
+import { Story } from './story';
 
-interface Props {
+interface StoryListProps {
+  storyList : {
+    id : number;
+    title : string;
+    author : string;
+    story : string;
+  }[]
 }
 
-export const Home : FC<Props> = () => {
+export const Home : FC<StoryListProps> = ({storyList}) => {
   return (
-    <div>
-      This is home page
+    <div className = 'App'>
+      {storyList.map((story) => (
+        <Story key={story.id} story = {story} />
+      ))}
     </div>
   );
 }

@@ -1,12 +1,21 @@
 import React, {FC} from 'react';
+import '../App.css'
 
-interface Props {
-}
+interface StoryProps {
+  story: {
+    id : number;
+    title : string;
+    author : string;
+    story : string;
+  }
+};
 
-export const Story : FC<Props> = () => {
+export const Story : FC<StoryProps> = ({story}) => {
   return (
-    <div>
-        This is Story page
+    <div className = 'App'>
+        <h1>{story.title}</h1>
+        {story.story}
+        {story.author}
     </div>
   );
 }
