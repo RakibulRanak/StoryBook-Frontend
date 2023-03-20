@@ -12,7 +12,7 @@ export const App : FC = () => {
   return (
     <Router>
       <Routes>
-          {/* <Route path="/stories/:id" Component={StoryView} /> */}
+          <Route path="/stories/:id" Component={StoryView} />
           <Route path="/signup" Component={SignUp} />
           <Route path="/signin" Component={SignIn} />
           <Route path="/" Component = {Home}/>
