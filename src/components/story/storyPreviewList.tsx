@@ -1,5 +1,5 @@
-import React, {FC, useEffect, useState} from 'react';
-import '../App.css'
+import {FC} from 'react';
+import '../../App.css'
 import { StoryPreview } from './storyPreview';
 
 interface Story {
