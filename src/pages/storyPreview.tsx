@@ -1,14 +1,14 @@
 import React, {FC} from 'react';
 import '../App.css'
 
-interface StoryProps {
-    id : number;
-    title : string;
-    author : string;
-    story : string;
-};
+interface Story {
+  id : number;
+  title : string;
+  author : string;
+  story : string;
+}
 
-export const Story : FC<StoryProps> = ({story,title,author}) => {
+export const StoryPreview : FC<Story> = ({title,story,author}) => {
   return (
     <div className = 'App'>
         <h1>{title}</h1>
