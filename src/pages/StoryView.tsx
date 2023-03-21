@@ -11,8 +11,8 @@ export const StoryView: FC = () => {
   const { id } = useParams<StoryId>();
   const key: number = Number(id);
   return (
-    <div className='App'>
-      { <StoryViewItem id={key} />}
+    <div>
+      { <StoryViewItem id={key - 1} />}
     </div>
   );
 };

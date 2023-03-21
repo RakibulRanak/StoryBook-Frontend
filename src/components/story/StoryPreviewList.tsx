@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import '../../App.css'
-import { StoryPreview } from './StoryPreview';
+import { StoryPreviewItem } from './StoryPreviewItem';
 
 interface Story {
     id : number;
@@ -17,7 +17,7 @@ export const StoryPreviewList : FC<StoryList> = ({storyList}) => {
   return (
     <div>
       {storyList.map((story) => (
-        <StoryPreview key={story.id} {...story} />
+        <StoryPreviewItem key={story.id} {...story} />
       ))}
     </div>
   );

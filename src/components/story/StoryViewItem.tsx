@@ -27,8 +27,8 @@ export const StoryViewItem: FC<StoryId> = ({id}) => {
   return (
     <div className='App'>
       <h1>{title}</h1>
+      <h2>{author}</h2>
       {story}
-      {author}
     </div>
   );
 };

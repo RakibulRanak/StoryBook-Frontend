@@ -8,12 +8,12 @@ interface Story {
   story : string;
 }
 
-export const StoryPreview : FC<Story> = ({title,story,author}) => {
+export const StoryPreviewItem : FC<Story> = ({title,story,author}) => {
   return (
     <div className = 'App'>
         <h1>{title}</h1>
+        <h2>{author}</h2>
         {story}
-        {author}
     </div>
   );
 }

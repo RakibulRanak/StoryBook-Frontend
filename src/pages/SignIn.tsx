@@ -1,9 +1,6 @@
 import React, {FC} from 'react';
 
-interface Props {
-}
-
-export const SignIn : FC<Props> = () => {
+export const SignIn : FC = () => {
   return (
     <div>
         This is signIn page

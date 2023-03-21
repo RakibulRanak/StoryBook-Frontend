@@ -1,12 +1,9 @@
 import React, {FC} from 'react';
 
-interface Props {
-}
-
-export const NotFound : FC<Props> = () => {
+export const NotFound : FC = () => {
   return (
-    <div>
-      This is not found page
+    <div className='App'>
+      Page not found
     </div>
   );
 }
