@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from  '@testing-library/react'
-import { StoryPreviewItem} from './StoryPreviewItem';
+import { StoryPreviewItem } from '../../../components/story/StoryPreviewItem';
 
 const testStory = {
     "id" : 0,

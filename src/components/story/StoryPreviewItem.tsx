@@ -1,12 +1,6 @@
 import React, {FC} from 'react';
 import '../../App.css'
-
-interface Story {
-  id : number;
-  title : string;
-  author : string;
-  story : string;
-}
+import { Story } from '../../models/story';
 
 export const StoryPreviewItem : FC<Story> = ({title,story,author}) => {
   return (

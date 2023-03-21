@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { NotFound } from './NotFound';
+import { NotFound } from '../../pages/NotFound';
 
 describe('NotFound', () => {
   test('renders "Page not found" text', () => {

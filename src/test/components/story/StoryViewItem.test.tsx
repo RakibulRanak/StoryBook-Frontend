@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { StoryViewItem } from './StoryViewItem';
+import { StoryViewItem } from '../../../components/story/StoryViewItem';
 
 
 describe('StoryViewItem component', () => {

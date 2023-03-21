@@ -1,17 +1,8 @@
 import {FC} from 'react';
 import '../../App.css'
 import { StoryPreviewItem } from './StoryPreviewItem';
+import { StoryList } from '../../models/story';
 
-interface Story {
-    id : number;
-    title : string;
-    author : string;
-    story : string;
-}
-
-interface StoryList {
-    storyList : Story[];
-}
  
 export const StoryPreviewList : FC<StoryList> = ({storyList}) => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from  '@testing-library/react'
-import { StoryPreviewList} from './StoryPreviewList';
-import storyData from '../../storage/stories.json'
+import { StoryPreviewList } from '../../../components/story/StoryPreviewList';
+import storyData from '../../../storage/stories.json'
 
 
 

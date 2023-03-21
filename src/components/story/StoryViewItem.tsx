@@ -1,17 +1,8 @@
 import React, {FC} from 'react';
 import '../../App.css'
 import storyData from '../../storage/stories.json'
+import { Story, StoryId } from '../../models/story';
 
-interface Story {
-  id : number;
-  title : string;
-  author : string;
-  story : string;
-}
-
-type StoryId = {
-  id : number
-}
 
 export const StoryViewItem: FC<StoryId> = ({id}) => {
   if (!storyData[id]) {

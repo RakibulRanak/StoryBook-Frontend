@@ -3,12 +3,8 @@ import {useParams} from 'react-router-dom';
 import '../App.css'
 import { StoryViewItem } from '../components/story/StoryViewItem';
 
-type StoryId = {
-  id : string
-}
-
 export const StoryView: FC = () => {
-  const { id } = useParams<StoryId>();
+  const { id } = useParams<string>();
   const key: number = Number(id);
   return (
     <div>
