@@ -3,6 +3,7 @@ export interface Story {
     title : string;
     author : string;
     story : string;
+    postedAt : string;
 }
 
 export interface StoryList{

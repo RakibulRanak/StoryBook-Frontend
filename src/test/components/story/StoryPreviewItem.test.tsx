@@ -6,7 +6,8 @@ const testStory = {
     "id" : 0,
     "story" : "Once upon a time",
     "author" : "RakibulRanak",
-    "title" : "Tiger and Lion"
+    "title" : "Tiger and Lion",
+    "postedAt" : "2021-11-30T09:11:29.272Z"
 }
 
 
