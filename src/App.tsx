@@ -1,12 +1,12 @@
 
 import React, {FC} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { SignIn } from './pages/signIn';
-import { SignUp } from './pages/signUp';
-import { NotFound } from './pages/notFound';
-import { StoryView } from './pages/storyView';
+import { SignIn } from './pages/SignIn';
+import { SignUp } from './pages/SignUp';
+import { NotFound } from './pages/NotFound';
+import { StoryView } from './pages/StoryView';
 
-import { Home } from './pages/home';
+import { Home } from './pages/Home';
 
 export const App : FC = () => {
   return (

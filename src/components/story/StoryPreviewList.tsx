@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import '../../App.css'
-import { StoryPreview } from './storyPreview';
+import { StoryPreview } from './StoryPreview';
 
 interface Story {
     id : number;

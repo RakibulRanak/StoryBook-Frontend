@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
-import {useParams} from 'react-router-dom';
-import '../App.css'
-import storyData from '../storage/stories.json'
+import '../../App.css'
+import storyData from '../../storage/stories.json'
 
 interface Story {
   id : number;
@@ -11,14 +10,11 @@ interface Story {
 }
 
 type StoryId = {
-  id : string
+  id : number
 }
 
-export const StoryView: FC = () => {
-  const { id } = useParams<StoryId>();
-  const key: number = Number(id);
-
-  if (!storyData[key]) {
+export const StoryViewItem: FC<StoryId> = ({id}) => {
+  if (!storyData[id]) {
     return (
       <div className='App'>
         <h1>Story not found</h1>
@@ -26,7 +22,7 @@ export const StoryView: FC = () => {
     );
   }
 
-  const { story, title, author }: Story = storyData[key];
+  const { story, title, author }: Story = storyData[id];
 
   return (
     <div className='App'>
