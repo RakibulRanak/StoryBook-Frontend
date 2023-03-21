@@ -1,23 +1,23 @@
 [
-    {
-        "id": 1,
-        "title": "The Adventures of Sherlock Holmes",
-        "author": "Arthur Conan Doyle",
-        "story": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the first of Holmes's short stories to feature in the Strand Magazine, 'A Scandal in Bohemia'.",
-        "postedAt" : "2021-11-30T09:11:29.272Z"
-    },
-    {
-        "id": 2,
-        "title": "Pride and Prejudice",
-        "author": "Jane Austen",
-        "story": "Pride and Prejudice is a novel by Jane Austen, first published on 28 January 1813. The story follows the main character Elizabeth Bennet as she deals with issues of manners, upbringing, morality, education, and marriage in the society of the landed gentry of early 19th-century England.",
-        "postedAt" : "2021-11-30T09:11:29.272Z"
-    },
-    {
-        "id": 3,
-        "title": "To Kill a Mockingbird",
-        "author": "Harper Lee",
-        "story": "To Kill a Mockingbird is a novel by Harper Lee, first published on 11 July 1960. The story takes place during three years of the Great Depression in the fictional 'tired old town' of Maycomb, Alabama, the seat of Maycomb County.",
-        "postedAt" : "2021-11-30T09:11:29.272Z"
-    } 
+  {
+    "id": 1,
+    "title": "The Adventures of Sherlock Holmes",
+    "author": "Arthur Conan Doyle",
+    "story": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the first of Holmes's short stories to feature in the Strand Magazine, 'A Scandal in Bohemia'.",
+    "postedAt": "2021-11-30T09:11:29.272Z"
+  },
+  {
+    "id": 2,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "story": "Pride and Prejudice is a novel by Jane Austen, first published on 28 January 1813. The story follows the main character Elizabeth Bennet as she deals with issues of manners, upbringing, morality, education, and marriage in the society of the landed gentry of early 19th-century England.",
+    "postedAt": "2021-11-30T09:11:29.272Z"
+  },
+  {
+    "id": 3,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "story": "To Kill a Mockingbird is a novel by Harper Lee, first published on 11 July 1960. The story takes place during three years of the Great Depression in the fictional 'tired old town' of Maycomb, Alabama, the seat of Maycomb County.",
+    "postedAt": "2021-11-30T09:11:29.272Z"
+  }
 ]

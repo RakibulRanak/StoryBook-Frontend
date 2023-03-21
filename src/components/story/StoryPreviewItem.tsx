@@ -1,13 +1,19 @@
-import React, {FC} from 'react';
-import '../../App.css'
-import { Story } from '../../models/story';
+import React, { FC } from "react";
+import { Link } from "react-router-dom";
+import "../../App.css";
+import { Story } from "../../models/story";
 
-export const StoryPreviewItem : FC<Story> = ({title,story,author}) => {
+export const StoryPreviewItem: FC<Story> = ({ title, story, author, id }) => {
   return (
-    <div className = 'App'>
+    <div className="App">
+      <Link
+        to={`/stories/${id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
         <h1>{title}</h1>
-        <h2>{author}</h2>
-        {story}
+      </Link>
+      <h2>{author}</h2>
+      {story}
     </div>
   );
-}
+};
