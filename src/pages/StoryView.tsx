@@ -9,7 +9,7 @@ export const StoryView: FC = () => {
   const key: number = Number(id);
   return(
     <Grid container justifyContent="center" sx = {{marginTop:"10vh"}}>
-        <StoryViewItem id={key - 1}/>
+        <StoryViewItem id={key}/>
     </Grid>
   )
 };

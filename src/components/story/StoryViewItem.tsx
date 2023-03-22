@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 export const StoryViewItem: FC<StoryId> = ({ id }) => {
+  id = id - 1;
   if (!storyData[id]) {
     return (
       <Typography component="h1" variant="h3" color="inherit">

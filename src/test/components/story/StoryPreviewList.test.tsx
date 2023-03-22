@@ -9,9 +9,10 @@ describe("StoryPreviwList", () => {
     expect(
       await screen.findByText("The Adventures of Sherlock Holmes")
     ).toBeInTheDocument();
+    // title
     const h1Tags = container.querySelectorAll("h1");
-    expect(h1Tags.length).toBe(3);
+    expect(h1Tags.length).toBe(4);
     const h2Tags = container.querySelectorAll("h2");
-    expect(h2Tags.length).toBe(3);
+    expect(h2Tags.length).toBe(4);
   });
 });

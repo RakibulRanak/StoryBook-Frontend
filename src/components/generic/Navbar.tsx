@@ -6,11 +6,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Link from "@mui/material/Link";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar: FC = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [username, setUsername] = React.useState("");
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // Perform logout logic here
@@ -18,6 +19,10 @@ export const Navbar: FC = () => {
     setUsername("");
   };
 
+  const handleLogin = () => {
+    // Perform logout logic here
+    navigate('/signin')
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -31,10 +36,8 @@ export const Navbar: FC = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
-              StoryHub
-            </Link>
+          <Typography onClick={() => navigate('/')} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            StoryHub
           </Typography>
           {isLoggedIn ? (
             <>
@@ -46,7 +49,7 @@ export const Navbar: FC = () => {
               </Button>
             </>
           ) : (
-            <Button color="inherit" href="/signin">
+            <Button onClick={handleLogin} color="inherit">
               Login
             </Button>
           )}

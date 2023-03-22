@@ -4,13 +4,14 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
 
 export const SignIn: FC = () => {
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { username, password } = Object.fromEntries(
@@ -38,6 +39,7 @@ export const SignIn: FC = () => {
             margin="normal"
             required
             fullWidth
+            data-testid="usernameInput"
             id="username"
             label="Username"
             name="username"
@@ -48,6 +50,7 @@ export const SignIn: FC = () => {
             margin="normal"
             required
             fullWidth
+            data-testid="passwordInput"
             name="password"
             label="Password"
             type="password"
@@ -67,10 +70,14 @@ export const SignIn: FC = () => {
             Sign In
           </Button>
           <Grid container justifyContent="center">
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+            <Grid item onClick={() => navigate("/signup")}>
+              <Typography
+                variant="body2"
+                color="primary"
+                sx={{ textDecoration: "underline", cursor: "pointer" }}
+              >
+                Don't have an account? Sign Up
+              </Typography>
             </Grid>
           </Grid>
         </Box>

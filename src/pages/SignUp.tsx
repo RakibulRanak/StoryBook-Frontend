@@ -2,13 +2,14 @@ import React, { FC } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp: FC = () => {
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { email, password, username, confirmPassword, name } =
@@ -108,10 +109,14 @@ export const SignUp: FC = () => {
             Sign Up
           </Button>
           <Grid container justifyContent="center">
-            <Grid item>
-              <Link href="/signin" variant="body2">
+            <Grid item onClick={() => navigate("/signin")}>
+              <Typography
+                variant="body2"
+                color="primary"
+                sx={{ textDecoration: "underline", cursor: "pointer" }}
+              >
                 Already have an account? Sign in
-              </Link>
+              </Typography>
             </Grid>
           </Grid>
         </Box>

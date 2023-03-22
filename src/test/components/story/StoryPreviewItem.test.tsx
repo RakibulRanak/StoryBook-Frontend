@@ -24,8 +24,8 @@ describe("renders story preview item correctly", () => {
     test("test if the title and author are in proper h tags", async () => {
       const { getByText } = render(<StoryPreviewItem {...testStory} />);
       const titleElement = getByText(testStory.title);
-      const authorElement = getByText(testStory.author);
-      expect(titleElement.tagName).toBe("H1");
-      expect(authorElement.tagName).toBe("H2");
+      const storyElement = getByText(testStory.story);
+      expect(titleElement.tagName).toBe("A");
+      expect(storyElement.tagName).toBe("H2");
     });
 });
