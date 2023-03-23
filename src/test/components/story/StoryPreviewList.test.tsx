@@ -2,10 +2,11 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { StoryPreviewList } from "../../../components/story/StoryPreviewList";
 import storyData from "../../../storage/stories.json";
+import { BrowserRouter } from "react-router-dom";
 
 describe("StoryPreviwList", () => {
   test("Check number of h1 tags or h2 tags are 3", async () => {
-    const { container } = render(<StoryPreviewList storyList={storyData} />);
+    const { container } = render(<BrowserRouter><StoryPreviewList storyList={storyData} /></BrowserRouter>);
     expect(
       await screen.findByText("The Adventures of Sherlock Holmes")
     ).toBeInTheDocument();

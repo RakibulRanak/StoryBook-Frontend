@@ -9,8 +9,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 
 export const Navbar: FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [username, setUsername] = React.useState("");
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [username, setUsername] = React.useState("RakibulRanak");
   const navigate = useNavigate();
 
   const handleLogout = () => {

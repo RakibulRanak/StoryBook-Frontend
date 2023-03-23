@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { StoryPreviewItem } from "../../../components/story/StoryPreviewItem";
+import { BrowserRouter } from "react-router-dom";
 
 const testStory = {
   id: 0,
@@ -12,7 +13,7 @@ const testStory = {
 
 describe("renders story preview item correctly", () => {
   test("test if the tag elements exists", async () => {
-    const { getByText } = render(<StoryPreviewItem {...testStory} />);
+    const { getByText } = render(<BrowserRouter><StoryPreviewItem {...testStory} /></BrowserRouter>);
     expect(await screen.findByText("RakibulRanak")).toBeInTheDocument();
     const titleElement = getByText(testStory.title);
     const authorElement = getByText(testStory.author);
@@ -22,10 +23,10 @@ describe("renders story preview item correctly", () => {
     expect(storyElement).toBeInTheDocument();
   }),
     test("test if the title and author are in proper h tags", async () => {
-      const { getByText } = render(<StoryPreviewItem {...testStory} />);
+      const { getByText } = render(<BrowserRouter><StoryPreviewItem {...testStory} /></BrowserRouter>);
       const titleElement = getByText(testStory.title);
       const storyElement = getByText(testStory.story);
-      expect(titleElement.tagName).toBe("A");
+      expect(titleElement.tagName).toBe("H1");
       expect(storyElement.tagName).toBe("H2");
     });
 });

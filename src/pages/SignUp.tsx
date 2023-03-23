@@ -41,6 +41,7 @@ export const SignUp: FC = () => {
                 fullWidth
                 id="name"
                 label="Name"
+                data-testid="nameInput"
                 autoFocus
                 inputProps={{
                   minLength: 6,
@@ -54,6 +55,7 @@ export const SignUp: FC = () => {
                 id="username"
                 label="Username"
                 name="username"
+                data-testid="usernameInput"
                 autoComplete="username"
                 inputProps={{
                   minLength: 6,
@@ -67,6 +69,7 @@ export const SignUp: FC = () => {
                 id="email"
                 label="Email Address"
                 name="email"
+                data-testid="emailInput"
                 autoComplete="email"
                 type="email"
               />
@@ -79,6 +82,7 @@ export const SignUp: FC = () => {
                 label="Password"
                 type="password"
                 id="password"
+                data-testid="passwordInput"
                 autoComplete="new-password"
                 inputProps={{
                   minLength: 6,
@@ -91,6 +95,7 @@ export const SignUp: FC = () => {
                 fullWidth
                 name="confirmPassword"
                 label="Confirm Password"
+                data-testid="confirmPasswordInput"
                 type="password"
                 id="confirmPassword"
                 autoComplete="new-password"
