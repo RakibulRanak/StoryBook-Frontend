@@ -5,15 +5,15 @@ import storyData from "../../../storage/stories.json";
 import { BrowserRouter } from "react-router-dom";
 
 describe("StoryPreviwList", () => {
-  test("Check number of h1 tags or h2 tags are 3", async () => {
-    const { container } = render(<BrowserRouter><StoryPreviewList storyList={storyData} /></BrowserRouter>);
-    expect(
-      await screen.findByText("The Adventures of Sherlock Holmes")
-    ).toBeInTheDocument();
-    // title
-    const h1Tags = container.querySelectorAll("h1");
-    expect(h1Tags.length).toBe(4);
-    const h2Tags = container.querySelectorAll("h2");
-    expect(h2Tags.length).toBe(4);
+
+  const setupTest = (): void => {
+    render(<BrowserRouter><StoryPreviewList storyList={storyData} /> </BrowserRouter>)
+  }
+
+  test("Check number of story previews", () => {
+    setupTest();
+    expect(screen.getByText("The Adventures of Sherlock Holmes")).toBeInTheDocument();
+    const total_Titles = screen.queryAllByTestId('storyPreviewItem');
+    expect(total_Titles).toHaveLength(4);
   });
 });

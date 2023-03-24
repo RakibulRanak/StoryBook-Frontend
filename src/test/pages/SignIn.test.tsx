@@ -5,22 +5,29 @@ import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom/extend-expect"
 
 describe("SignIn component", () => {
+
+  const setupTest = (): void => {
+    render(<BrowserRouter><SignIn /></BrowserRouter>)
+  }
+
   test("renders correctly", () => {
-    const { getByTestId, getByText } = render(<BrowserRouter><SignIn /></BrowserRouter>);
-    const usernameInput = getByTestId("usernameInput")
-    expect(usernameInput).toBeInTheDocument();
-    const passwordInput = getByTestId("passwordInput")
-    expect(passwordInput).toBeInTheDocument();
-    expect(getByText("Username *")).toBeInTheDocument();
+    setupTest();
+    expect(screen.getByTestId("usernameInput")).toBeInTheDocument();
+    expect(screen.getByTestId("passwordInput")).toBeInTheDocument();
+    expect(screen.getByText("Username *")).toBeInTheDocument();
   });
 
-
-
   test("shows sign up link", () => {
-    const { getByText } = render(<BrowserRouter><SignIn /></BrowserRouter>);
-    //const usernameInput = getByTestId("usernameInput")
-    const signUpLink = getByText("Don't have an account? Sign Up");
-    //console.log(signUpLink)
+    setupTest();
+    const signUpLink = screen.getByText("Don't have an account? Sign Up");
     expect(signUpLink).toBeInTheDocument();
+  });
+
+  test("Go to Sign up page when clicked", () => {
+    setupTest();
+    const signUpLink = screen.getByText("Don't have an account? Sign Up");
+    expect(signUpLink).toBeInTheDocument();
+    fireEvent.click(signUpLink);
+    expect(window.location.pathname).toBe('/signup');
   });
 });

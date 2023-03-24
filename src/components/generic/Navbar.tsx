@@ -36,7 +36,7 @@ export const Navbar: FC = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography onClick={() => navigate('/')} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography data-testid="storyHub" onClick={() => navigate('/')} variant="h6" component="div" sx={{ flexGrow: 1 }}>
             StoryHub
           </Typography>
           {isLoggedIn ? (

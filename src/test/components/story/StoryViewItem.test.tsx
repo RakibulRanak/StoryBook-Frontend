@@ -1,16 +1,21 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { StoryViewItem } from "../../../components/story/StoryViewItem";
+import storyData from "../../../storage/stories.json";
 
 describe("StoryViewItem component", () => {
+  const setupTest = (id: number): void => {
+    render(<StoryViewItem id={id} />)
+  }
+
   test("renders the story with the correct title and author", () => {
-    const { getByText } = render(<StoryViewItem id={1} />);
-    expect(getByText("The Adventures of Sherlock Holmes")).toBeInTheDocument();
-    expect(getByText("Arthur Conan Doyle")).toBeInTheDocument();
+    setupTest(1);
+    expect(screen.getByText(storyData[0].title)).toBeInTheDocument();
+    expect(screen.getByText(storyData[0].author)).toBeInTheDocument();
   });
 
   test("renders an error message if the story is not found", () => {
-    const { getByText } = render(<StoryViewItem id={999} />);
-    expect(getByText("Story Not Found")).toBeInTheDocument();
+    setupTest(10);
+    expect(screen.getByText("Story Not Found")).toBeInTheDocument();
   });
 });

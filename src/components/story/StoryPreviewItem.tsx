@@ -17,7 +17,7 @@ export const StoryPreviewItem: FC<Story> = ({ title, story, author, id }) => {
         marginBottom: '3vh'
       }}
     >
-      <Typography onClick={() => navigate(`/stories/${id}`)} component="h1" variant="h3" color="inherit">
+      <Typography data-testid="storyPreviewItem" onClick={() => navigate(`/stories/${id}`)} component="h1" variant="h3" color="inherit">
         {title}
       </Typography>
       <Typography variant="h6" color="text.secondary" display="inline" gutterBottom>
