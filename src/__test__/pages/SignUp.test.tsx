@@ -2,6 +2,7 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { SignUp } from "../../pages/SignUp";
 import { BrowserRouter } from "react-router-dom";
+import userEvent from '@testing-library/user-event';
 import "@testing-library/jest-dom/extend-expect"
 
 describe("SignUp component", () => {
@@ -33,5 +34,42 @@ describe("SignUp component", () => {
     fireEvent.click(signInLink);
     expect(window.location.pathname).toBe('/signin');
   });
+
+  test("Console log User Data when submit button is clicked", () => {
+    const mockConsoleLog = jest.spyOn(console, "log").mockImplementation();
+    setupTest();
+    fireEvent.change(screen.getByLabelText("Name *"), {
+      target: { value: "John Doe" }
+    });
+
+    fireEvent.change(screen.getByLabelText("Username *"), {
+      target: { value: "johndoe" }
+    });
+
+    fireEvent.change(screen.getByLabelText("Email Address *"), {
+      target: { value: "johndoe@example.com" }
+    });
+
+    fireEvent.change(screen.getByLabelText("Password *"), {
+      target: { value: "password" }
+    });
+
+    fireEvent.change(screen.getByLabelText("Confirm Password *"), {
+      target: { value: "password" }
+    });
+
+    fireEvent.submit(screen.getByRole("button", { name: "Sign Up" }));
+
+    expect(mockConsoleLog).toHaveBeenCalledWith({
+      email: "johndoe@example.com",
+      password: "password",
+      username: "johndoe",
+      confirmPassword: "password",
+      name: "John Doe"
+    })
+    mockConsoleLog.mockRestore();
+  });
+
+
 });
 

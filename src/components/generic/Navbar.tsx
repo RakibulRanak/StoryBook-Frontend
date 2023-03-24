@@ -17,6 +17,7 @@ export const Navbar: FC = () => {
     // Perform logout logic here
     setIsLoggedIn(false);
     setUsername("");
+    console.log("Logged Out")
   };
 
   const handleLogin = () => {

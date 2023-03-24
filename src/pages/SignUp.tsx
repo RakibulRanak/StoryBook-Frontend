@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { email, password, username, confirmPassword, name } =
@@ -35,6 +36,8 @@ export const SignUp: FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                onChange={(e) => setName(e.target.value)}
+                value={name}
                 autoComplete="name"
                 name="name"
                 required
