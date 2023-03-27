@@ -1,7 +1,7 @@
 import { FC } from "react";
 import "../../App.css";
 import { StoryPreviewItem } from "./StoryPreviewItem";
-import { StoryList } from "../../models/story";
+import { StoryList } from "../../models/storyModel";
 import Grid from '@mui/material/Grid';
 
 export const StoryPreviewList: FC<StoryList> = ({ storyList }) => {

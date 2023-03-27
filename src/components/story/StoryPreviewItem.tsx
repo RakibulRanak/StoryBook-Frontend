@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Story } from "../../models/story";
+import { Story } from "../../models/storyModel";
 import { useNavigate } from "react-router-dom";
 
 export const StoryPreviewItem: FC<Story> = ({ title, story, author, id }) => {

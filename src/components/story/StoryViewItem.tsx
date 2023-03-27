@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import '../../App.css'
 import storyData from '../../storage/stories.json'
-import { Story, StoryId } from '../../models/story';
+import { Story, StoryId } from '../../models/storyModel';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
