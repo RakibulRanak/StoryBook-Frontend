@@ -13,6 +13,7 @@ export interface StoryList {
 export interface StoryState {
     loading: boolean;
     storyList: Story[];
+    story : Story | null;
     error: any;
 }
 

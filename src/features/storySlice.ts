@@ -6,19 +6,20 @@ import { Story, StoryState, StoryId } from '../models/storyModel'
 const initialState: StoryState = {
     loading: false,
     storyList: [],
+    story : null,
     error: {}
 }
 
 export const fetchStories = createAsyncThunk('story/fetchStories', async () => {
-    return await axios.get('/api/v1/stories')
+    return await axios.get('http://localhost:8000/api/v1/stories')
         .then(res => {
-            return res.data
+            return res.data.data
         })
 })
 
-export const fetchStoryById = createAsyncThunk('story/fetchStoryById', async (id: string) => {
-    return await axios.get(`/api/product/${id}`).then(res => {
-        return res.data
+export const fetchStoryById = createAsyncThunk('story/fetchStoryById', async ({id}: StoryId) => {
+    return await axios.get(`http://localhost:8000/api/v1/stories/${id}`).then(res => {
+        return res.data.data
     })
 })
 
@@ -56,7 +57,7 @@ export const fetchStoryById = createAsyncThunk('story/fetchStoryById', async (id
 //     })
 // })
 
-const productSlice = createSlice({
+const storySlice = createSlice({
     name: 'story',
     initialState,
     reducers: {},
@@ -71,11 +72,26 @@ const productSlice = createSlice({
             state.error = ''
         })
 
-        // builder.addCase(fetchStories.rejected, (state, action) => {
-        //     state.loading = false
-        //     state.storyList = []
-        //     state.error = action.error
-        // })
+        builder.addCase(fetchStories.rejected, (state:StoryState, action: any) => {
+            state.loading = false
+            state.storyList = []
+            state.error = action.error
+        })
+        builder.addCase(fetchStoryById.pending, (state: StoryState) => {
+            state.loading = true
+        })
+
+        builder.addCase(fetchStoryById.fulfilled, (state: StoryState, action: PayloadAction<Story>) => {
+            state.loading = false
+            state.story = action.payload
+            state.error = ''
+        })
+
+        builder.addCase(fetchStoryById.rejected, (state:StoryState, action: any) => {
+            state.loading = false
+            state.story = null
+            state.error = action.error
+        })
 
         // builder.addCase(postStory.pending, state => {
         //     state.loading = true
@@ -126,4 +142,4 @@ const productSlice = createSlice({
 })
 
 
-export default productSlice.reducer
+export default storySlice.reducer
