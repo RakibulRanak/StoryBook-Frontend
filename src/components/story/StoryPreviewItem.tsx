@@ -3,18 +3,21 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Story } from "../../models/storyModel";
 import { useNavigate } from "react-router-dom";
+import { format } from 'date-fns';
+import ShowMoreText from 'react-show-more-text';
+import ExpandLess from "@mui/material";
+import ExpandMore from "@mui/material";
 
-export const StoryPreviewItem: FC<Story> = ({ title, story, author, id }) => {
+export const StoryPreviewItem: FC<Story> = ({ title, story, author, id, postedAt }) => {
   const navigate = useNavigate();
+
   return (
     <Box
       sx={{
-        position: "relative",
-        //p: { xs: 3, md: 6 },
-        // pr: { md: 0 },
-        marginLeft: "20vw",
-        marginRight: "20vw",
+        marginLeft: "23vw",
+        marginRight: "23vw",
         marginBottom: "3vh",
+        textAlign: "left"
       }}
     >
       <Typography
@@ -40,17 +43,43 @@ export const StoryPreviewItem: FC<Story> = ({ title, story, author, id }) => {
         display="inline"
         style={{ marginLeft: "20px" }}
       >
-        {"10 NOV"}
+        {format(new Date(postedAt), 'MMMM dd, yyyy')}
       </Typography>
-      <Typography
-        component="h2"
-        variant="h5"
-        color="inherit"
-        paragraph
-        sx={{ marginTop: "20px" }}
-      >
-        {story}
-      </Typography>
-    </Box>
+      <Box sx={{ marginTop: "20px" }}>
+        <ShowMoreText
+          lines={3}
+
+          more={
+            <span>
+              {' '}
+              <b>See more</b>
+            </span>
+          }
+          less={
+            <span>
+              {' '}
+              <b>See less</b>
+            </span>
+          }
+        >
+          <Typography
+            component="h2"
+            variant="body1"
+            color="inherit"
+            paragraph
+            sx={{
+              display: '-webkit-box',
+              overflow: 'hidden',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 8,
+            }}
+          >
+            {story}
+          </Typography>
+
+        </ShowMoreText>
+      </Box>
+
+    </Box >
   );
 };

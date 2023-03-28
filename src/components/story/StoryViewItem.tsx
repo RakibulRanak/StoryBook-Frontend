@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import "../../App.css";
-import storyData from "../../storage/stories.json";
 import { Story, StoryId } from "../../models/storyModel";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
@@ -22,6 +21,10 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
     console.log("MOUNt");
     dispatch(fetchStoryById({ id }));
   }, []);
+
+  if (loading) {
+    return <Typography>Loading...</Typography>;
+  }
 
   if (!storyData) {
     return (
@@ -64,7 +67,7 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
         {"10 NOV"}
       </Typography>
       <Typography
-        variant="h5"
+        variant="body1"
         color="inherit"
         paragraph
         sx={{ marginTop: "20px" }}
@@ -73,4 +76,5 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
       </Typography>
     </Box>
   );
+
 };

@@ -7,6 +7,8 @@ import { RootState } from "../../app/store";
 import { fetchStories } from "../../features/storySlice";
 
 import { useEffect } from "react";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 export const StoryPreviewList: FC = () => {
   const { loading, storyList, error } = useAppSelector(
@@ -21,16 +23,19 @@ export const StoryPreviewList: FC = () => {
   }, []);
 
   return (
-    <Grid container justifyContent="center" sx={{ marginTop: "10vh" }}>
+    <>
       {loading ? (
-        <>Stories are loading!!!</>
+        <Box sx={{ width: "100%", textAlign: "center", marginTop: "10vh" }}>
+          <Typography>Loading...</Typography>
+        </Box>
+
       ) : (
-        <>
+        <Grid container sx={{ marginTop: "10vh" }}>
           {storyList.map((story) => (
             <StoryPreviewItem key={story.id} {...story} />
           ))}
-        </>
+        </Grid>
       )}
-    </Grid>
+    </>
   );
 };
