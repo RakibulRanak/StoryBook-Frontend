@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import "../../App.css";
 import { Story, StoryId } from "../../models/storyModel";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
@@ -9,17 +9,16 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 export const StoryViewItem: FC<StoryId> = ({ id }) => {
-  const {
-    loading,
-    story: storyData,
-    error,
-  } = useAppSelector((state: RootState) => state.story);
-  console.log(loading);
+  const { story: storyData } = useAppSelector(
+    (state: RootState) => state.story
+  );
+  const [loading, setLoading] = useState(true);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     console.log("MOUNt");
-    dispatch(fetchStoryById({ id }));
+    dispatch(fetchStoryById(id));
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -76,5 +75,4 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
       </Typography>
     </Box>
   );
-
 };

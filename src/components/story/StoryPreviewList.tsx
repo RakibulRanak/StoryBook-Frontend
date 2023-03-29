@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import "../../App.css";
 import { StoryPreviewItem } from "./StoryPreviewItem";
 import Grid from "@mui/material/Grid";
@@ -11,15 +11,14 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 
 export const StoryPreviewList: FC = () => {
-  const { loading, storyList, error } = useAppSelector(
-    (state: RootState) => state.story
-  );
-  console.log(loading);
+  const { storyList } = useAppSelector((state: RootState) => state.story);
+  const [loading, setLoading] = useState(true);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     console.log("MOUNt");
     dispatch(fetchStories());
+    setLoading(false);
   }, []);
 
   return (
@@ -28,7 +27,6 @@ export const StoryPreviewList: FC = () => {
         <Box sx={{ width: "100%", textAlign: "center", marginTop: "10vh" }}>
           <Typography>Loading...</Typography>
         </Box>
-
       ) : (
         <Grid container sx={{ marginTop: "10vh" }}>
           {storyList.map((story) => (

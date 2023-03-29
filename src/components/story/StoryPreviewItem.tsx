@@ -3,12 +3,15 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Story } from "../../models/storyModel";
 import { useNavigate } from "react-router-dom";
-import { format } from 'date-fns';
-import ShowMoreText from 'react-show-more-text';
-import ExpandLess from "@mui/material";
-import ExpandMore from "@mui/material";
+import { format } from "date-fns";
 
-export const StoryPreviewItem: FC<Story> = ({ title, story, author, id, postedAt }) => {
+export const StoryPreviewItem: FC<Story> = ({
+  title,
+  story,
+  author,
+  id,
+  postedAt,
+}) => {
   const navigate = useNavigate();
 
   return (
@@ -17,7 +20,7 @@ export const StoryPreviewItem: FC<Story> = ({ title, story, author, id, postedAt
         marginLeft: "23vw",
         marginRight: "23vw",
         marginBottom: "3vh",
-        textAlign: "left"
+        textAlign: "left",
       }}
     >
       <Typography
@@ -43,43 +46,27 @@ export const StoryPreviewItem: FC<Story> = ({ title, story, author, id, postedAt
         display="inline"
         style={{ marginLeft: "20px" }}
       >
-        {format(new Date(postedAt), 'MMMM dd, yyyy')}
+        {format(new Date(postedAt), "MMMM dd, yyyy")}
       </Typography>
-      <Box sx={{ marginTop: "20px" }}>
-        <ShowMoreText
-          lines={3}
-
-          more={
-            <span>
-              {' '}
-              <b>See more</b>
-            </span>
-          }
-          less={
-            <span>
-              {' '}
-              <b>See less</b>
-            </span>
-          }
+      <Box sx={{ marginTop: "20px", overflow: "hidden" }}>
+        <Typography
+          component="h2"
+          variant="body2"
+          color="inherit"
+          paragraph
+          className="classes.heading"
+          sx={{
+            display: "-webkit-box",
+            overflow: "hidden",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 3,
+            maxWidth: "100%",
+            textOverflow: "ellipsis",
+          }}
         >
-          <Typography
-            component="h2"
-            variant="body1"
-            color="inherit"
-            paragraph
-            sx={{
-              display: '-webkit-box',
-              overflow: 'hidden',
-              WebkitBoxOrient: 'vertical',
-              WebkitLineClamp: 8,
-            }}
-          >
-            {story}
-          </Typography>
-
-        </ShowMoreText>
+          {story}
+        </Typography>
       </Box>
-
-    </Box >
+    </Box>
   );
 };

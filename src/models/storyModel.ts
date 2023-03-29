@@ -1,8 +1,12 @@
-export interface Story {
+export interface BaseStory {
+    title : string;
+    story : string;
+}
+
+
+export interface Story extends BaseStory {
     id: number;
-    title: string;
     author: string;
-    story: string;
     postedAt: string;
 }
 
@@ -11,10 +15,8 @@ export interface StoryList {
 }
 
 export interface StoryState {
-    loading: boolean;
     storyList: Story[];
     story : Story | null;
-    error: any;
 }
 
 export type StoryId = {
