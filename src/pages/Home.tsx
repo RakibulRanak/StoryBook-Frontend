@@ -2,10 +2,9 @@ import React, { FC } from "react";
 import "../App.css";
 import { StoryPreviewList } from "../components/story/StoryPreviewList";
 import { useState } from "react";
-import { Box, Container, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import StoryModal from "../components/story/StoryModal";
-import { text } from "stream/consumers";
-import { textAlign } from "@mui/system";
+
 
 const loggedIn = true;
 export const Home: FC = () => {

@@ -3,7 +3,7 @@ import storySlice from '../features/storySlice'
 
 export const store = configureStore({
     reducer: {
-        story : storySlice
+        story: storySlice
     }
 })
 

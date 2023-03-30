@@ -7,8 +7,13 @@ import { useEffect } from "react";
 import { fetchStoryById } from "../../features/storySlice";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Edit from "@mui/icons-material/Edit";
+import DeleteIcon from '@mui/icons-material/Delete';
+import StoryModal from "./StoryModal";
+
 
 export const StoryViewItem: FC<StoryId> = ({ id }) => {
+  const [showModal, setShowModal] = useState(false);
   const { story: storyData } = useAppSelector(
     (state: RootState) => state.story
   );
@@ -46,9 +51,29 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
         marginBottom: "3vh",
       }}
     >
-      <Typography component="h1" variant="h3" color="inherit">
-        {title}
-      </Typography>
+
+      <Box display="flex">
+        <Typography component="h1" variant="h3" color="inherit">
+          {title}
+        </Typography>
+        <Edit onClick={() => setShowModal(true)} sx={{ marginTop: "1.3vh", marginLeft: "2vw" }}>
+
+        </Edit>
+        {showModal && (
+          <StoryModal
+            close={() => {
+              setShowModal(false);
+              document.getElementById(
+                'root'
+              )!.style.filter = 'none';
+            }}
+            storyId={id}
+            title={title}
+            story={story}
+          />
+        )}
+        <DeleteIcon sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
+      </Box>
       <Typography
         variant="h6"
         color="text.secondary"
@@ -73,6 +98,6 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
       >
         {story}
       </Typography>
-    </Box>
+    </Box >
   );
 };

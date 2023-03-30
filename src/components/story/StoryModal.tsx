@@ -1,7 +1,5 @@
 import {
   Box,
-  Typography,
-  Container,
   TextareaAutosize,
   Button,
 } from "@mui/material";
@@ -9,7 +7,7 @@ import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
 import { postStory, updateStory } from "../../features/storySlice";
 import { useAppDispatch } from "../../app/hook";
-import { Story } from "../../models/storyModel";
+
 
 const my_modal = {
   position: "fixed",
@@ -44,14 +42,14 @@ export const StoryModal = (props: any) => {
     props.close();
     setTitle("");
     setStory("");
-    console.log({ title, story });
     dispatch(postStory({ title, story }));
     setDisable(true);
   };
   const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    console.log(props)
     e.preventDefault();
     props.close();
-    updateStory({ ...props, title, story });
+    dispatch(updateStory({ story: { title, story }, id: props.storyId }));
     setDisable(true);
   };
 
