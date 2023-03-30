@@ -8,6 +8,7 @@ import Edit from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
 import StoryModal from "./StoryModal";
 import { useState } from "react";
+import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
 
 export const StoryPreviewItem: FC<Story> = ({
   title,
@@ -18,6 +19,7 @@ export const StoryPreviewItem: FC<Story> = ({
 }) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Box
@@ -54,7 +56,10 @@ export const StoryPreviewItem: FC<Story> = ({
             story={story}
           />
         )}
-        <DeleteIcon sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
+        <DeleteIcon onClick={() => setOpen(true)} sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
+        {open && <ConfirmDeleteDialog close={() => {
+          setOpen(false)
+        }} storyId={id} ></ConfirmDeleteDialog>}
       </Box>
       <Typography
         variant="h6"

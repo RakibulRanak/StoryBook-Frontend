@@ -15,7 +15,7 @@ export interface StoryList {
 
 export interface StoryState {
     storyList: Story[];
-    story: Story | null;
+    story: Story | undefined;
 }
 
 export type StoryId = {

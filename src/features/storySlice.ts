@@ -4,7 +4,7 @@ import story from '../storage/stories.json'
 
 const initialState: StoryState = {
     storyList: story,
-    story: null,
+    story: undefined,
 }
 
 const storySlice = createSlice({
@@ -15,7 +15,8 @@ const storySlice = createSlice({
             //state.storyList;
         },
         fetchStoryById: (state: StoryState, action: PayloadAction<number>) => {
-            state.story = state.storyList[action.payload - 1]
+            const fetchedStory: Story | undefined = state.storyList.find(obj => obj.id === action.payload)
+            state.story = fetchedStory;
         },
         postStory: (state: StoryState, action: PayloadAction<BaseStory>) => {
             const newStory: Story = {
@@ -32,8 +33,13 @@ const storySlice = createSlice({
             state.storyList[action.payload.id - 1].story = action.payload.story.story;
             state.story = state.storyList[action.payload.id - 1]
         },
+        deleteStory: (state: StoryState, action: PayloadAction<number>) => {
+            const filteredStories = state.storyList.filter(obj => obj.id !== action.payload)
+            state.storyList = filteredStories;
+
+        }
     }
 })
 
-export const { fetchStories, fetchStoryById, postStory, updateStory } = storySlice.actions;
+export const { fetchStories, fetchStoryById, postStory, updateStory, deleteStory } = storySlice.actions;
 export default storySlice.reducer

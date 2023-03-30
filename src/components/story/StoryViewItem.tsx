@@ -10,10 +10,12 @@ import Box from "@mui/material/Box";
 import Edit from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
 import StoryModal from "./StoryModal";
+import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
 
 
 export const StoryViewItem: FC<StoryId> = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = useState(false);
   const { story: storyData } = useAppSelector(
     (state: RootState) => state.story
   );
@@ -72,7 +74,10 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
             story={story}
           />
         )}
-        <DeleteIcon sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
+        <DeleteIcon onClick={() => setOpen(true)} sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
+        {open && <ConfirmDeleteDialog close={() => {
+          setOpen(false)
+        }} storyId={id}></ConfirmDeleteDialog>}
       </Box>
       <Typography
         variant="h6"
