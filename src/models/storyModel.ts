@@ -1,11 +1,11 @@
 export interface BaseStory {
+    author: string;
     title: string;
     story: string;
 }
 
 export interface Story extends BaseStory {
     id: number;
-    author: string;
     postedAt: string;
 }
 

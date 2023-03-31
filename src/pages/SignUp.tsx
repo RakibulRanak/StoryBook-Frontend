@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -7,15 +7,31 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
-
+import { useAppDispatch } from "../app/hook";
+import { signUp } from "../features/authSlice";
 export const SignUp: FC = () => {
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [disable, setDisable] = useState(false);
+
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (username && username.trim() && password && password.trim() && confirmPassword && confirmPassword.trim()
+      && email && email.trim() && name && name.trim()) setDisable(false);
+    else setDisable(true);
+  }, [username, password, name, email, confirmPassword]);
+
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { email, password, username, confirmPassword, name } =
-      Object.fromEntries(new FormData(event.currentTarget));
-    console.log({ email, password, username, confirmPassword, name });
+    dispatch(signUp({ email, password, username, confirmPassword, name }))
+    navigate('/signin')
   };
 
   return (
@@ -53,6 +69,7 @@ export const SignUp: FC = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                onChange={(e) => setUsername(e.target.value)}
                 required
                 fullWidth
                 id="username"
@@ -67,6 +84,7 @@ export const SignUp: FC = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 fullWidth
                 id="email"
@@ -79,6 +97,7 @@ export const SignUp: FC = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 fullWidth
                 name="password"
@@ -94,6 +113,7 @@ export const SignUp: FC = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 fullWidth
                 name="confirmPassword"
@@ -109,6 +129,7 @@ export const SignUp: FC = () => {
             </Grid>
           </Grid>
           <Button
+            disabled={disable}
             type="submit"
             fullWidth
             variant="contained"

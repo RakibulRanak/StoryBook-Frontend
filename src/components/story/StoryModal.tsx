@@ -5,8 +5,9 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
-import { postStory, updateStory } from "../../features/storySlice";
-import { useAppDispatch } from "../../app/hook";
+import { fetchStories, postStory, updateStory } from "../../features/storySlice";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { RootState } from "../../app/store";
 
 
 const my_modal = {
@@ -28,6 +29,9 @@ export const StoryModal = (props: any) => {
   const [title, setTitle] = useState(props.title);
   const [story, setStory] = useState(props.story);
   const [disable, setDisable] = useState(true);
+  const { username } = useAppSelector(
+    (state: RootState) => state.auth
+  );
   const dispatch = useAppDispatch();
 
   document.getElementById("root")!.style.filter = "blur(3px)";
@@ -42,14 +46,14 @@ export const StoryModal = (props: any) => {
     props.close();
     setTitle("");
     setStory("");
-    dispatch(postStory({ title, story }));
+    dispatch(postStory({ title, story, author: username! }));
+    dispatch(fetchStories())
     setDisable(true);
   };
   const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
-    console.log(props)
     e.preventDefault();
     props.close();
-    dispatch(updateStory({ story: { title, story }, id: props.storyId }));
+    dispatch(updateStory({ story: { title, story, author: username! }, id: props.storyId }));
     setDisable(true);
   };
 

@@ -19,7 +19,11 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
   const { story: storyData } = useAppSelector(
     (state: RootState) => state.story
   );
+  const { username, loggedIn } = useAppSelector(
+    (state: RootState) => state.auth
+  );
   const [loading, setLoading] = useState(true);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -58,26 +62,28 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
         <Typography component="h1" variant="h3" color="inherit">
           {title}
         </Typography>
-        <Edit onClick={() => setShowModal(true)} sx={{ marginTop: "1.3vh", marginLeft: "2vw" }}>
+        {
+          loggedIn && username === author &&
+          (<><Edit onClick={() => setShowModal(true)} sx={{ marginTop: "1.3vh", marginLeft: "2vw" }}> </Edit>
+            {showModal && (
+              <StoryModal
+                close={() => {
+                  setShowModal(false);
+                  document.getElementById(
+                    'root'
+                  )!.style.filter = 'none';
+                }}
+                storyId={id}
+                title={title}
+                story={story}
+              />
+            )}
+            <DeleteIcon onClick={() => setOpen(true)} sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
+            {open && <ConfirmDeleteDialog close={() => {
+              setOpen(false)
+            }} storyId={id} ></ConfirmDeleteDialog>}</>)
 
-        </Edit>
-        {showModal && (
-          <StoryModal
-            close={() => {
-              setShowModal(false);
-              document.getElementById(
-                'root'
-              )!.style.filter = 'none';
-            }}
-            storyId={id}
-            title={title}
-            story={story}
-          />
-        )}
-        <DeleteIcon onClick={() => setOpen(true)} sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
-        {open && <ConfirmDeleteDialog close={() => {
-          setOpen(false)
-        }} storyId={id}></ConfirmDeleteDialog>}
+        }
       </Box>
       <Typography
         variant="h6"

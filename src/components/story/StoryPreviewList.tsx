@@ -16,7 +16,6 @@ export const StoryPreviewList: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log("MOUNt");
     dispatch(fetchStories());
     setLoading(false);
   }, []);

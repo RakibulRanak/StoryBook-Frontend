@@ -9,15 +9,29 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../app/hook";
+import { signIn } from "../features/authSlice";
+import { useState, useEffect } from "react";
 
 export const SignIn: FC = () => {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [disable, setDisable] = useState(false);
+
+  useEffect(() => {
+    if (username && username.trim() && password && password.trim()) setDisable(false);
+    else setDisable(true);
+  }, [username, password]);
+
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { username, password } = Object.fromEntries(
-      new FormData(event.currentTarget)
-    );
+    dispatch(signIn({ username, password }))
     console.log({ username, password });
+    navigate('/')
   };
 
   return (
@@ -45,6 +59,7 @@ export const SignIn: FC = () => {
             name="username"
             autoComplete="username"
             autoFocus
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -56,6 +71,7 @@ export const SignIn: FC = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -66,6 +82,7 @@ export const SignIn: FC = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={disable}
           >
             Sign In
           </Button>

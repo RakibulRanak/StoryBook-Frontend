@@ -9,15 +9,19 @@ import {
 } from '@mui/material/';
 import { useAppDispatch } from "../../app/hook";
 import { deleteStory } from "../../features/storySlice";
+import { useNavigate } from "react-router-dom";
 
 
 export const ConfirmDeleteDialog = (props: any) => {
     const [open, setOpen] = useState(true);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleDelete = () => {
         props.close()
-        dispatch(deleteStory(props.id))
+        dispatch(deleteStory(props.storyId))
+        navigate('/')
+
     };
 
     return (

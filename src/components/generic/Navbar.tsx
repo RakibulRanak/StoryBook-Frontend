@@ -7,21 +7,22 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { RootState } from "../../app/store";
+import { signOut } from "../../features/authSlice";
 
 export const Navbar: FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-  const [username, setUsername] = React.useState("RakibulRanak");
   const navigate = useNavigate();
-
+  const { username, loggedIn } = useAppSelector(
+    (state: RootState) => state.auth
+  );
+  const dispatch = useAppDispatch();
+  console.log(username)
   const handleLogout = () => {
-    // Perform logout logic here
-    setIsLoggedIn(false);
-    setUsername("");
-    console.log("Logged Out")
+    dispatch(signOut());
   };
 
   const handleLogin = () => {
-    // Perform logout logic here
     navigate('/signin')
   };
   return (
@@ -40,7 +41,7 @@ export const Navbar: FC = () => {
           <Typography data-testid="storyHub" onClick={() => navigate('/')} variant="h6" component="div" sx={{ flexGrow: 1 }}>
             StoryHub
           </Typography>
-          {isLoggedIn ? (
+          {loggedIn ? (
             <>
               <Typography variant="subtitle1" component="div" sx={{ mr: 2 }}>
                 {username}

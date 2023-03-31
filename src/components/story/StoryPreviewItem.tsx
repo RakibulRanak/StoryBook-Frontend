@@ -9,6 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import StoryModal from "./StoryModal";
 import { useState } from "react";
 import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
+import { useAppSelector } from "../../app/hook";
+import { RootState } from "../../app/store";
 
 export const StoryPreviewItem: FC<Story> = ({
   title,
@@ -20,6 +22,9 @@ export const StoryPreviewItem: FC<Story> = ({
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const { username, loggedIn } = useAppSelector(
+    (state: RootState) => state.auth
+  );
 
   return (
     <Box
@@ -40,26 +45,28 @@ export const StoryPreviewItem: FC<Story> = ({
         >
           {title}
         </Typography>
-        <Edit onClick={() => setShowModal(true)} sx={{ marginTop: "1.3vh", marginLeft: "2vw" }}>
+        {
+          loggedIn && username === author &&
+          (<><Edit onClick={() => setShowModal(true)} sx={{ marginTop: "1.3vh", marginLeft: "2vw" }}> </Edit>
+            {showModal && (
+              <StoryModal
+                close={() => {
+                  setShowModal(false);
+                  document.getElementById(
+                    'root'
+                  )!.style.filter = 'none';
+                }}
+                storyId={id}
+                title={title}
+                story={story}
+              />
+            )}
+            <DeleteIcon onClick={() => setOpen(true)} sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
+            {open && <ConfirmDeleteDialog close={() => {
+              setOpen(false)
+            }} storyId={id} ></ConfirmDeleteDialog>}</>)
 
-        </Edit>
-        {showModal && (
-          <StoryModal
-            close={() => {
-              setShowModal(false);
-              document.getElementById(
-                'root'
-              )!.style.filter = 'none';
-            }}
-            storyId={id}
-            title={title}
-            story={story}
-          />
-        )}
-        <DeleteIcon onClick={() => setOpen(true)} sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
-        {open && <ConfirmDeleteDialog close={() => {
-          setOpen(false)
-        }} storyId={id} ></ConfirmDeleteDialog>}
+        }
       </Box>
       <Typography
         variant="h6"
