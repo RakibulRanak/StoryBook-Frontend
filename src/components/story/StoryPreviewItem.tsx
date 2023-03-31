@@ -4,28 +4,11 @@ import Box from "@mui/material/Box";
 import { Story } from "../../models/storyModel";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import Edit from "@mui/icons-material/Edit";
-import DeleteIcon from '@mui/icons-material/Delete';
-import StoryModal from "./StoryModal";
-import { useState } from "react";
-import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
-import { useAppSelector } from "../../app/hook";
-import { RootState } from "../../app/store";
+import AuthenticatedStoryActions from "./AuthenticatedStoryActions";
 
-export const StoryPreviewItem: FC<Story> = ({
-  title,
-  story,
-  author,
-  id,
-  postedAt,
-}) => {
+export const StoryPreviewItem: FC<Story> = (storyData) => {
+  const { title, story, author, id, postedAt } = storyData;
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-  const [open, setOpen] = useState(false);
-  const { username, loggedIn } = useAppSelector(
-    (state: RootState) => state.auth
-  );
-
   return (
     <Box
       sx={{
@@ -45,28 +28,7 @@ export const StoryPreviewItem: FC<Story> = ({
         >
           {title}
         </Typography>
-        {
-          loggedIn && username === author &&
-          (<><Edit onClick={() => setShowModal(true)} sx={{ marginTop: "1.3vh", marginLeft: "2vw" }}> </Edit>
-            {showModal && (
-              <StoryModal
-                close={() => {
-                  setShowModal(false);
-                  document.getElementById(
-                    'root'
-                  )!.style.filter = 'none';
-                }}
-                storyId={id}
-                title={title}
-                story={story}
-              />
-            )}
-            <DeleteIcon onClick={() => setOpen(true)} sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
-            {open && <ConfirmDeleteDialog close={() => {
-              setOpen(false)
-            }} storyId={id} ></ConfirmDeleteDialog>}</>)
-
-        }
+        <AuthenticatedStoryActions {...storyData} />
       </Box>
       <Typography
         variant="h6"

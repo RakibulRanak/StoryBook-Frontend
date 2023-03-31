@@ -6,21 +6,13 @@ import { RootState } from "../../app/store";
 import { useEffect } from "react";
 import { fetchStoryById } from "../../features/storySlice";
 import Typography from "@mui/material/Typography";
+import { format } from "date-fns";
 import Box from "@mui/material/Box";
-import Edit from "@mui/icons-material/Edit";
-import DeleteIcon from '@mui/icons-material/Delete';
-import StoryModal from "./StoryModal";
-import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
-
+import AuthenticatedStoryActions from "./AuthenticatedStoryActions";
 
 export const StoryViewItem: FC<StoryId> = ({ id }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [open, setOpen] = useState(false);
   const { story: storyData } = useAppSelector(
     (state: RootState) => state.story
-  );
-  const { username, loggedIn } = useAppSelector(
-    (state: RootState) => state.auth
   );
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +27,6 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
   if (loading) {
     return <Typography>Loading...</Typography>;
   }
-
   if (!storyData) {
     return (
       <Typography component="h1" variant="h3" color="inherit">
@@ -43,47 +34,22 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
       </Typography>
     );
   }
-
-  const { story, title, author }: Story = storyData;
+  const { story, title, author, postedAt }: Story = storyData;
 
   return (
     <Box
       sx={{
         position: "relative",
-        //p: { xs: 3, md: 6 },
-        // pr: { md: 0 },
         marginLeft: "20vw",
         marginRight: "20vw",
         marginBottom: "3vh",
       }}
     >
-
       <Box display="flex">
         <Typography component="h1" variant="h3" color="inherit">
           {title}
         </Typography>
-        {
-          loggedIn && username === author &&
-          (<><Edit onClick={() => setShowModal(true)} sx={{ marginTop: "1.3vh", marginLeft: "2vw" }}> </Edit>
-            {showModal && (
-              <StoryModal
-                close={() => {
-                  setShowModal(false);
-                  document.getElementById(
-                    'root'
-                  )!.style.filter = 'none';
-                }}
-                storyId={id}
-                title={title}
-                story={story}
-              />
-            )}
-            <DeleteIcon onClick={() => setOpen(true)} sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}></DeleteIcon>
-            {open && <ConfirmDeleteDialog close={() => {
-              setOpen(false)
-            }} storyId={id} ></ConfirmDeleteDialog>}</>)
-
-        }
+        <AuthenticatedStoryActions {...storyData} />
       </Box>
       <Typography
         variant="h6"
@@ -99,7 +65,7 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
         display="inline"
         style={{ marginLeft: "20px" }}
       >
-        {"10 NOV"}
+        {format(new Date(postedAt), "MMMM dd, yyyy")}
       </Typography>
       <Typography
         variant="body1"

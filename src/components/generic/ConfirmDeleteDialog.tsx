@@ -13,13 +13,13 @@ import { useNavigate } from "react-router-dom";
 
 
 export const ConfirmDeleteDialog = (props: any) => {
-    const [open, setOpen] = useState(true);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const handleDelete = () => {
+        //setOpen(false)
         props.close()
-        dispatch(deleteStory(props.storyId))
+        dispatch(deleteStory(props.id))
         navigate('/')
 
     };
@@ -27,7 +27,7 @@ export const ConfirmDeleteDialog = (props: any) => {
     return (
         <div>
             <Dialog
-                open={open}
+                open={true}
                 onClose={props.close}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"

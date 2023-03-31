@@ -53,7 +53,7 @@ export const StoryModal = (props: any) => {
   const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     props.close();
-    dispatch(updateStory({ story: { title, story, author: username! }, id: props.storyId }));
+    dispatch(updateStory({ story: { title, story, author: username! }, id: props.id }));
     setDisable(true);
   };
 
@@ -86,9 +86,9 @@ export const StoryModal = (props: any) => {
           disabled={disable}
           variant="contained"
           color="primary"
-          onClick={props.storyId ? handleUpdateSubmit : handlePostSubmit}
+          onClick={props.id ? handleUpdateSubmit : handlePostSubmit}
         >
-          {props.storyId ? "UPDATE" : "POST"}
+          {props.id ? "UPDATE" : "POST"}
         </Button>
         <Button variant="outlined" onClick={props.close}>
           Cancel

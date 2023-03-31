@@ -24,7 +24,7 @@ const storySlice = createSlice({
             const newStory: Story = {
                 ...action.payload,
                 postedAt: new Date().toLocaleString(),
-                id: state.storyList.length + 1
+                id: Math.floor(Math.random() * 10001)
             }
             state.storyList.push(newStory)
         },
