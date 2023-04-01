@@ -5,9 +5,8 @@ import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
 import { useEffect } from "react";
 import { fetchStoryById } from "../../features/storySlice";
-import Typography from "@mui/material/Typography";
+import { Typography, Box } from "@mui/material";
 import { format } from "date-fns";
-import Box from "@mui/material/Box";
 import AuthenticatedStoryActions from "./AuthenticatedStoryActions";
 
 export const StoryViewItem: FC<StoryId> = ({ id }) => {
@@ -75,6 +74,6 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
       >
         {story}
       </Typography>
-    </Box >
+    </Box>
   );
 };

@@ -1,14 +1,11 @@
 import { FC, useState } from "react";
 import "../../App.css";
 import { StoryPreviewItem } from "./StoryPreviewItem";
-import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
 import { fetchStories } from "../../features/storySlice";
-
 import { useEffect } from "react";
-import { Typography } from "@mui/material";
-import { Box } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 export const StoryPreviewList: FC = () => {
   const { storyList } = useAppSelector((state: RootState) => state.story);

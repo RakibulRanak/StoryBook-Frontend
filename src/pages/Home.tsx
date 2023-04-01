@@ -9,9 +9,7 @@ import { useAppSelector } from "../app/hook";
 
 export const Home: FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const { loggedIn } = useAppSelector(
-    (state: RootState) => state.auth
-  );
+  const { loggedIn } = useAppSelector((state: RootState) => state.auth);
   return (
     <Box>
       {loggedIn && (

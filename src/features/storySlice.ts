@@ -13,8 +13,7 @@ const storySlice = createSlice({
     initialState,
     reducers: {
         fetchStories: (state: StoryState) => {
-            //state.storyList;
-            state.storyList = state.storyList.sort((a, b) => b.postedAt.localeCompare(a.postedAt))
+            state.storyList = state.storyList.sort((a, b) => new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime())
         },
         fetchStoryById: (state: StoryState, action: PayloadAction<number>) => {
             const fetchedStory: Story | undefined = state.storyList.find(obj => obj.id === action.payload)

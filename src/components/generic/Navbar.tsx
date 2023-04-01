@@ -1,10 +1,12 @@
 import React, { FC } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
@@ -17,13 +19,13 @@ export const Navbar: FC = () => {
     (state: RootState) => state.auth
   );
   const dispatch = useAppDispatch();
-  console.log(username)
+  console.log(username);
   const handleLogout = () => {
     dispatch(signOut());
   };
 
   const handleLogin = () => {
-    navigate('/signin')
+    navigate("/signin");
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -38,7 +40,13 @@ export const Navbar: FC = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography data-testid="storyHub" onClick={() => navigate('/')} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            data-testid="storyHub"
+            onClick={() => navigate("/")}
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
             StoryHub
           </Typography>
           {loggedIn ? (

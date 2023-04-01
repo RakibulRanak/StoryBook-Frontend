@@ -1,26 +1,28 @@
 import React, { FC } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import {
+  Button,
+  Avatar,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../app/hook";
 import { signIn } from "../features/authSlice";
 import { useState, useEffect } from "react";
 
 export const SignIn: FC = () => {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disable, setDisable] = useState(false);
 
   useEffect(() => {
-    if (username && username.trim() && password && password.trim()) setDisable(false);
+    if (username && username.trim() && password && password.trim())
+      setDisable(false);
     else setDisable(true);
   }, [username, password]);
 
@@ -29,9 +31,9 @@ export const SignIn: FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(signIn({ username, password }))
+    dispatch(signIn({ username, password }));
     console.log({ username, password });
-    navigate('/')
+    navigate("/");
   };
 
   return (

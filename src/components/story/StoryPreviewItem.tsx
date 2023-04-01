@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import { Typography, Box } from "@mui/material";
 import { Story } from "../../models/storyModel";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";

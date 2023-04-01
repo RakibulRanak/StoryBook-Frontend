@@ -1,14 +1,13 @@
-import {
-  Box,
-  TextareaAutosize,
-  Button,
-} from "@mui/material";
+import { Box, TextareaAutosize, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
-import { fetchStories, postStory, updateStory } from "../../features/storySlice";
+import {
+  fetchStories,
+  postStory,
+  updateStory,
+} from "../../features/storySlice";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
-
 
 const my_modal = {
   position: "fixed",
@@ -29,9 +28,7 @@ export const StoryModal = (props: any) => {
   const [title, setTitle] = useState(props.title);
   const [story, setStory] = useState(props.story);
   const [disable, setDisable] = useState(true);
-  const { username } = useAppSelector(
-    (state: RootState) => state.auth
-  );
+  const { username } = useAppSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
 
   document.getElementById("root")!.style.filter = "blur(3px)";
@@ -47,13 +44,15 @@ export const StoryModal = (props: any) => {
     setTitle("");
     setStory("");
     dispatch(postStory({ title, story, author: username! }));
-    dispatch(fetchStories())
+    dispatch(fetchStories());
     setDisable(true);
   };
   const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     props.close();
-    dispatch(updateStory({ story: { title, story, author: username! }, id: props.id }));
+    dispatch(
+      updateStory({ story: { title, story, author: username! }, id: props.id })
+    );
     setDisable(true);
   };
 

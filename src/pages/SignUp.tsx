@@ -1,14 +1,17 @@
 import React, { FC, useState, useEffect } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import {
+  Button,
+  Avatar,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../app/hook";
 import { signUp } from "../features/authSlice";
+
 export const SignUp: FC = () => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -17,12 +20,22 @@ export const SignUp: FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [disable, setDisable] = useState(false);
 
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (username && username.trim() && password && password.trim() && confirmPassword && confirmPassword.trim()
-      && email && email.trim() && name && name.trim()) setDisable(false);
+    if (
+      username &&
+      username.trim() &&
+      password &&
+      password.trim() &&
+      confirmPassword &&
+      confirmPassword.trim() &&
+      email &&
+      email.trim() &&
+      name &&
+      name.trim()
+    )
+      setDisable(false);
     else setDisable(true);
   }, [username, password, name, email, confirmPassword]);
 
@@ -30,8 +43,8 @@ export const SignUp: FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(signUp({ email, password, username, confirmPassword, name }))
-    navigate('/signin')
+    dispatch(signUp({ email, password, username, confirmPassword, name }));
+    navigate("/signin");
   };
 
   return (
