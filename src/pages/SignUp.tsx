@@ -1,9 +1,5 @@
 import React, { FC } from "react";
-import {
-  Avatar,
-  Typography,
-  Container,
-} from "@mui/material";
+import { Avatar, Typography, Container } from "@mui/material";
 import { SignUpForm } from "../components/signup/SignUpForm";
 import { ParentFormBox } from "./style";
 

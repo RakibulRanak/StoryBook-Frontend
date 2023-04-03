@@ -61,7 +61,7 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
         {format(new Date(postedAt), "MMMM dd, yyyy")}
       </Typography>
       <Typography
-        variant="body2"
+        variant="body1"
         color="inherit"
         paragraph
         sx={{ marginTop: "20px" }}

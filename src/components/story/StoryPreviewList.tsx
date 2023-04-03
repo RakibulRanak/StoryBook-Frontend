@@ -17,19 +17,19 @@ export const StoryPreviewList: FC = () => {
     setLoading(false);
   }, []);
 
-  return (
-    <>
-      {loading ? (
-        <Box sx={{ width: "100%", textAlign: "center", marginTop: "10vh" }}>
-          <Typography>Loading...</Typography>
-        </Box>
-      ) : (
-        <Grid container sx={{ marginTop: "10vh" }}>
-          {storyList.map((story) => (
-            <StoryPreviewItem key={story.id} {...story} />
-          ))}
-        </Grid>
-      )}
-    </>
+  const renderLoading = () => (
+    <Box sx={{ width: "100%", textAlign: "center", marginTop: "10vh" }}>
+      <Typography>Loading...</Typography>
+    </Box>
   );
+
+  const renderStoryPreviews = () => (
+    <Grid container sx={{ marginTop: "10vh" }}>
+      {storyList.map((story) => (
+        <StoryPreviewItem key={story.id} {...story} />
+      ))}
+    </Grid>
+  );
+
+  return <>{loading ? renderLoading() : renderStoryPreviews()}</>;
 };

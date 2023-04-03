@@ -13,6 +13,30 @@ import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
 import { signOut } from "../../features/authSlice";
 
+const LoggedInContent: FC<{ username: string; handleLogout: () => void }> = ({
+  username,
+  handleLogout,
+}) => {
+  return (
+    <>
+      <Typography variant="subtitle1" component="div" sx={{ mr: 2 }}>
+        {username}
+      </Typography>
+      <Button color="inherit" onClick={handleLogout}>
+        Logout
+      </Button>
+    </>
+  );
+};
+
+const LoggedOutContent: FC<{ handleLogin: () => void }> = ({ handleLogin }) => {
+  return (
+    <Button onClick={handleLogin} color="inherit">
+      Login
+    </Button>
+  );
+};
+
 export const Navbar: FC = () => {
   const navigate = useNavigate();
   const { username, loggedIn } = useAppSelector(
@@ -26,6 +50,7 @@ export const Navbar: FC = () => {
   const handleLogin = () => {
     navigate("/signin");
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -49,18 +74,9 @@ export const Navbar: FC = () => {
             StoryHub
           </Typography>
           {loggedIn ? (
-            <>
-              <Typography variant="subtitle1" component="div" sx={{ mr: 2 }}>
-                {username}
-              </Typography>
-              <Button color="inherit" onClick={handleLogout}>
-                Logout
-              </Button>
-            </>
+            <LoggedInContent username={username!} handleLogout={handleLogout} />
           ) : (
-            <Button onClick={handleLogin} color="inherit">
-              Login
-            </Button>
+            <LoggedOutContent handleLogin={handleLogin} />
           )}
         </Toolbar>
       </AppBar>
