@@ -8,21 +8,7 @@ import {
 } from "../../features/storySlice";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
-
-const my_modal = {
-  position: "fixed",
-  top: "50%",
-  left: "50%",
-  width: "50vw",
-  minWidth: "300px",
-  transform: "translate(-50%, -50%)",
-  padding: "12px",
-  paddingBottom: "8px",
-  zIndex: 1000,
-  align: "center",
-  backdropFilter: "blur(3px)",
-  background: "gray.500",
-};
+import { my_modal, text_area } from "./style";
 
 export const StoryModal = (props: any) => {
   const [title, setTitle] = useState(props.title);
@@ -30,7 +16,6 @@ export const StoryModal = (props: any) => {
   const [disable, setDisable] = useState(true);
   const { username } = useAppSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
-
   document.getElementById("root")!.style.filter = "blur(3px)";
 
   useEffect(() => {
@@ -70,12 +55,7 @@ export const StoryModal = (props: any) => {
         <TextareaAutosize
           minRows={15}
           placeholder="Story"
-          style={{
-            resize: "vertical",
-            width: "100%",
-            maxHeight: "50vh",
-            minHeight: "20vh",
-          }}
+          style={text_area}
           id="outlined-multiline-static"
           value={story}
           onChange={(e) => setStory(e.target.value)}

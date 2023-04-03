@@ -7,9 +7,9 @@ import Grid from '@mui/material/Grid';
 export const StoryView: FC = () => {
   const { id } = useParams<string>();
   const key: number = Number(id);
-  return(
-    <Grid container justifyContent="center" sx = {{marginTop:"10vh"}}>
-        <StoryViewItem id={key}/>
+  return (
+    <Grid container justifyContent="center" sx={{ marginTop: "10vh" }}>
+      <StoryViewItem id={key} />
     </Grid>
   )
 };

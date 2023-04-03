@@ -4,19 +4,13 @@ import { Story } from "../../models/storyModel";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import AuthenticatedStoryActions from "./AuthenticatedStoryActions";
+import { ParentStoryBox, StoryPreviewTypography } from "./style";
 
 export const StoryPreviewItem: FC<Story> = (storyData) => {
   const { title, story, author, id, postedAt } = storyData;
   const navigate = useNavigate();
   return (
-    <Box
-      sx={{
-        marginLeft: "23vw",
-        marginRight: "23vw",
-        marginBottom: "3vh",
-        textAlign: "left",
-      }}
-    >
+    <ParentStoryBox>
       <Box display="flex">
         <Typography
           data-testid="storyPreviewItem"
@@ -46,24 +40,10 @@ export const StoryPreviewItem: FC<Story> = (storyData) => {
         {format(new Date(postedAt), "MMMM dd, yyyy")}
       </Typography>
       <Box sx={{ marginTop: "20px", overflow: "hidden" }}>
-        <Typography
-          component="h2"
-          variant="body2"
-          color="inherit"
-          paragraph
-          className="classes.heading"
-          sx={{
-            display: "-webkit-box",
-            overflow: "hidden",
-            WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 3,
-            maxWidth: "100%",
-            textOverflow: "ellipsis",
-          }}
-        >
+        <StoryPreviewTypography>
           {story}
-        </Typography>
+        </StoryPreviewTypography>
       </Box>
-    </Box>
+    </ParentStoryBox>
   );
 };

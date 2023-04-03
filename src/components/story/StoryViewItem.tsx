@@ -8,6 +8,7 @@ import { fetchStoryById } from "../../features/storySlice";
 import { Typography, Box } from "@mui/material";
 import { format } from "date-fns";
 import AuthenticatedStoryActions from "./AuthenticatedStoryActions";
+import { ParentStoryBox } from "./style";
 
 export const StoryViewItem: FC<StoryId> = ({ id }) => {
   const { story: storyData } = useAppSelector(
@@ -36,14 +37,7 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
   const { story, title, author, postedAt }: Story = storyData;
 
   return (
-    <Box
-      sx={{
-        position: "relative",
-        marginLeft: "20vw",
-        marginRight: "20vw",
-        marginBottom: "3vh",
-      }}
-    >
+    <ParentStoryBox>
       <Box display="flex">
         <Typography component="h1" variant="h3" color="inherit">
           {title}
@@ -67,13 +61,13 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
         {format(new Date(postedAt), "MMMM dd, yyyy")}
       </Typography>
       <Typography
-        variant="body1"
+        variant="body2"
         color="inherit"
         paragraph
         sx={{ marginTop: "20px" }}
       >
         {story}
       </Typography>
-    </Box>
+    </ParentStoryBox>
   );
 };

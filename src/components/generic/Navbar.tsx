@@ -19,7 +19,6 @@ export const Navbar: FC = () => {
     (state: RootState) => state.auth
   );
   const dispatch = useAppDispatch();
-  console.log(username);
   const handleLogout = () => {
     dispatch(signOut());
   };

@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import StoryModal from "../components/story/StoryModal";
 import { RootState } from "../app/store";
 import { useAppSelector } from "../app/hook";
+import { HomeBox } from "./style";
 
 export const Home: FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,11 +19,7 @@ export const Home: FC = () => {
             py={1.3}
             sx={{ bgcolor: "grey.300", borderRadius: "10px" }}
             onClick={() => setShowModal(true)}
-            style={{
-              margin: "auto",
-              width: "100%",
-              textAlign: "center",
-            }}
+            style={HomeBox}
           >
             Want to post a story?
           </Box>
