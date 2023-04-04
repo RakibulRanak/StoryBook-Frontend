@@ -2,6 +2,8 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { StoryPreviewItem } from "../../../components/story/StoryPreviewItem";
 import { BrowserRouter } from "react-router-dom";
+import { store } from "../../../app/store";
+import { Provider } from "react-redux";
 
 const testStory = {
   id: 1,
@@ -14,7 +16,7 @@ const testStory = {
 describe("renders story preview item correctly", () => {
 
   const setupTest = (): void => {
-    render(<BrowserRouter><StoryPreviewItem {...testStory} /></BrowserRouter>);
+    render(<Provider store={store}><BrowserRouter><StoryPreviewItem {...testStory} /></BrowserRouter></Provider>);
   }
 
   test("test if the tag elements exists", async () => {
@@ -29,7 +31,7 @@ describe("renders story preview item correctly", () => {
     const titleElement = screen.getByText(testStory.title);
     const storyElement = screen.getByText(testStory.story);
     expect(titleElement.tagName).toBe("H1");
-    expect(storyElement.tagName).toBe("H2");
+    expect(storyElement.tagName).toBe("P");
   });
 
   test("Go to /stories/:id page when clicked to story title", () => {

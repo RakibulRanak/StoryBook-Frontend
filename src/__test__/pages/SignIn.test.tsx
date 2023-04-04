@@ -2,12 +2,14 @@ import React from "react";
 import { render, fireEvent, screen, getByText } from "@testing-library/react";
 import { SignIn } from "../../pages/SignIn";
 import { BrowserRouter } from "react-router-dom";
+import { store } from "../../app/store";
+import { Provider } from "react-redux";
 import "@testing-library/jest-dom/extend-expect"
 
 describe("SignIn component", () => {
 
   const setupTest = (): void => {
-    render(<BrowserRouter><SignIn /></BrowserRouter>)
+    render(<Provider store={store}><BrowserRouter><SignIn /></BrowserRouter></Provider>)
   }
 
   test("renders correctly", () => {

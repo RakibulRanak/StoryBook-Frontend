@@ -2,13 +2,15 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { SignUp } from "../../pages/SignUp";
 import { BrowserRouter } from "react-router-dom";
+import { store } from "../../app/store";
+import { Provider } from "react-redux";
 import userEvent from '@testing-library/user-event';
 import "@testing-library/jest-dom/extend-expect"
 
 describe("SignUp component", () => {
 
   const setupTest = (): void => {
-    render(<BrowserRouter><SignUp /></BrowserRouter>);
+    render(<Provider store={store}><BrowserRouter><SignUp /></BrowserRouter></Provider>);
   }
 
   test("renders correctly", () => {
@@ -35,7 +37,7 @@ describe("SignUp component", () => {
     expect(window.location.pathname).toBe('/signin');
   });
 
-  test("Console log User Data when submit button is clicked", () => {
+  test("Increase user array size when submit button is clicked", () => {
     const mockConsoleLog = jest.spyOn(console, "log").mockImplementation();
     setupTest();
     fireEvent.change(screen.getByLabelText("Name *"), {
@@ -58,16 +60,11 @@ describe("SignUp component", () => {
       target: { value: "password" }
     });
 
+    const prevSize = store.getState().auth.users.length;
     fireEvent.submit(screen.getByRole("button", { name: "Sign Up" }));
+    const curSize = store.getState().auth.users.length;
 
-    expect(mockConsoleLog).toHaveBeenCalledWith({
-      email: "johndoe@example.com",
-      password: "password",
-      username: "johndoe",
-      confirmPassword: "password",
-      name: "John Doe"
-    })
-    mockConsoleLog.mockRestore();
+    expect(curSize).toBe(prevSize + 1);
   });
 
 
