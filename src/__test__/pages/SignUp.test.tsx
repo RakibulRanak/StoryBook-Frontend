@@ -24,7 +24,7 @@ describe("SignUp component", () => {
     expect(screen.getByTestId("passwordInput")).toBeInTheDocument();
     expect(screen.getByTestId("nameInput")).toBeInTheDocument();
     expect(screen.getByTestId("emailInput")).toBeInTheDocument();
-    expect(screen.getByTestId("confirmPasswordInput")).toBeInTheDocument();
+    expect(screen.getByTestId("confirmpasswordInput")).toBeInTheDocument();
     //expect(getByText("Username *")).toBeInTheDocument();
   });
 
@@ -53,7 +53,7 @@ describe("SignUp component", () => {
       target: { value: "johndoe" },
     });
 
-    fireEvent.change(screen.getByLabelText("Email Address *"), {
+    fireEvent.change(screen.getByLabelText("Email *"), {
       target: { value: "johndoe@example.com" },
     });
 

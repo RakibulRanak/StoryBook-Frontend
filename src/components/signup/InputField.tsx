@@ -17,7 +17,8 @@ export const InputField: FC<InputFieldProps> = ({
   required = true,
   minLength,
 }) => {
-  const mark = label.toLocaleLowerCase();
+  const mark = label.toLocaleLowerCase().split(" ").join("");
+  console.log(mark);
   return (
     <TextField
       onChange={onChange}
