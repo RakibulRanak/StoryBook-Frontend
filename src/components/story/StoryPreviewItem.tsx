@@ -37,7 +37,7 @@ export const StoryPreviewItem: FC<Story> = (storyData) => {
         display="inline"
         style={{ marginLeft: "20px" }}
       >
-        {/* {format(new Date(postedAt), "MMMM dd, yyyy")} */}
+        {format(new Date(postedAt), "MMMM dd, yyyy")}
       </Typography>
       <Box sx={{ marginTop: "20px", overflow: "hidden" }}>
         <StoryPreviewTypography>{story}</StoryPreviewTypography>
