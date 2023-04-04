@@ -7,8 +7,12 @@ import { Provider } from "react-redux";
 
 describe("StoryViewItem component", () => {
   const setupTest = (id: number): void => {
-    render(<Provider store={store}><StoryViewItem id={id} /></Provider>)
-  }
+    render(
+      <Provider store={store}>
+        <StoryViewItem id={id} />
+      </Provider>
+    );
+  };
 
   test("renders the story with the correct title and author", () => {
     setupTest(1);

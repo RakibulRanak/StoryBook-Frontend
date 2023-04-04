@@ -6,7 +6,12 @@ import { Provider } from "react-redux";
 
 describe("NotFound", () => {
   test('renders "Page not found" text', () => {
-    const { getByText } = render(<Provider store={store}> <NotFound /></Provider >);
+    const { getByText } = render(
+      <Provider store={store}>
+        {" "}
+        <NotFound />
+      </Provider>
+    );
     expect(getByText("Page not found")).toBeInTheDocument();
   });
 });

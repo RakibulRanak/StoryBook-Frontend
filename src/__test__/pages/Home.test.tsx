@@ -9,7 +9,10 @@ describe("<HomePage />", () => {
   test("renders correctly", async () => {
     render(
       <Provider store={store}>
-        <BrowserRouter> <Home /></BrowserRouter>
+        <BrowserRouter>
+          {" "}
+          <Home />
+        </BrowserRouter>
       </Provider>
     );
     expect(

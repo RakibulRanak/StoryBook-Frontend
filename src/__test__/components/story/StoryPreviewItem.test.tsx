@@ -14,10 +14,15 @@ const testStory = {
 };
 
 describe("renders story preview item correctly", () => {
-
   const setupTest = (): void => {
-    render(<Provider store={store}><BrowserRouter><StoryPreviewItem {...testStory} /></BrowserRouter></Provider>);
-  }
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <StoryPreviewItem {...testStory} />
+        </BrowserRouter>
+      </Provider>
+    );
+  };
 
   test("test if the tag elements exists", async () => {
     setupTest();
@@ -40,5 +45,4 @@ describe("renders story preview item correctly", () => {
     fireEvent.click(titleElement);
     expect(window.location.pathname).toBe(`/stories/${testStory.id}`);
   });
-
 });

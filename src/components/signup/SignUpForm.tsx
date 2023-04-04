@@ -3,6 +3,7 @@ import { Button, TextField, Grid, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
 import { signUp } from "../../features/authSlice";
+import { InputField } from "./InputField";
 
 export const SignUpForm: FC = () => {
   const [username, setUsername] = useState("");
@@ -43,80 +44,33 @@ export const SignUpForm: FC = () => {
     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <TextField
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            autoComplete="name"
-            name="name"
-            required
-            fullWidth
-            id="name"
+          <InputField
+            onChange={(event) => setName(event.target.value)}
             label="Name"
-            data-testid="nameInput"
-            autoFocus
-            inputProps={{
-              minLength: 6,
-            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <InputField
             onChange={(e) => setUsername(e.target.value)}
-            required
-            fullWidth
-            id="username"
             label="Username"
-            name="username"
-            data-testid="usernameInput"
-            autoComplete="username"
-            inputProps={{
-              minLength: 6,
-            }}
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <InputField
             onChange={(e) => setEmail(e.target.value)}
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            data-testid="emailInput"
-            autoComplete="email"
-            type="email"
+            label="Email"
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <InputField
             onChange={(e) => setPassword(e.target.value)}
-            required
-            fullWidth
-            name="password"
             label="Password"
-            type="password"
-            id="password"
-            data-testid="passwordInput"
-            autoComplete="new-password"
-            inputProps={{
-              minLength: 6,
-            }}
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <InputField
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            fullWidth
-            name="confirmPassword"
             label="Confirm Password"
-            data-testid="confirmPasswordInput"
-            type="password"
-            id="confirmPassword"
-            autoComplete="new-password"
-            inputProps={{
-              minLength: 6,
-            }}
           />
         </Grid>
       </Grid>
