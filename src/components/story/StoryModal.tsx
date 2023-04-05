@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Box, TextareaAutosize, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
@@ -10,13 +11,20 @@ import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
 import { my_modal, text_area } from "./style";
 
-export const StoryModal = (props: any) => {
-  const [title, setTitle] = useState(props.title);
-  const [story, setStory] = useState(props.story);
+interface StoryModalProps {
+  title?: string;
+  story?: string;
+  id?: number;
+  close: () => void;
+}
+
+export const StoryModal: FC<StoryModalProps> = (props) => {
+  const [title, setTitle] = useState(props.title || "");
+  const [story, setStory] = useState(props.story || "");
   const [disable, setDisable] = useState(true);
   const { username } = useAppSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
-  document.getElementById("root")!.style.filter = "blur(3px)";
+  //document.getElementById("root")!.style.filter = "blur(3px)";
 
   useEffect(() => {
     if (story && story.trim() && title && title.trim()) setDisable(false);
@@ -36,7 +44,7 @@ export const StoryModal = (props: any) => {
     e.preventDefault();
     props.close();
     dispatch(
-      updateStory({ story: { title, story, author: username! }, id: props.id })
+      updateStory({ story: { title, story, author: username! }, id: props.id! })
     );
     setDisable(true);
   };

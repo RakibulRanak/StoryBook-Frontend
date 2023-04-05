@@ -6,6 +6,7 @@ import { RootState } from "../../app/store";
 import StoryModal from "./StoryModal";
 import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
 import { Story } from "../../models/storyModel";
+import { render } from "@testing-library/react";
 
 const AuthenticatedStoryActions: FC<Story> = ({ author, id, title, story }) => {
   const [showModal, setShowModal] = useState(false);
@@ -14,36 +15,30 @@ const AuthenticatedStoryActions: FC<Story> = ({ author, id, title, story }) => {
     (state: RootState) => state.auth
   );
 
-  const handleEditClick = () => {
-    setShowModal(true);
-  };
-
-  const handleDeleteClick = () => {
-    setOpen(true);
-  };
-
   const renderEditButton = () => (
     <Edit
-      onClick={handleEditClick}
+      onClick={() => setShowModal(true)}
       sx={{ marginTop: "1.3vh", marginLeft: "2vw" }}
     />
   );
 
-  const renderStoryModal = () => (
-    <StoryModal
-      close={() => {
-        setShowModal(false);
-        document.getElementById("root")!.style.filter = "none";
-      }}
-      id={id}
-      title={title}
-      story={story}
-    />
-  );
+  const renderStoryModal = () => {
+    return (
+      <StoryModal
+        close={() => {
+          setShowModal(false);
+          document.getElementById("root")!.style.filter = "none";
+        }}
+        id={id}
+        title={title}
+        story={story}
+      />
+    );
+  };
 
   const renderDeleteButton = () => (
     <DeleteIcon
-      onClick={handleDeleteClick}
+      onClick={() => setOpen(true)}
       sx={{ marginTop: "1.3vh", marginLeft: "1vw" }}
     />
   );
