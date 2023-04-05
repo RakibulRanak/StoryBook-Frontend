@@ -3,7 +3,7 @@ import { Button, TextField, Grid, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
 import { signUp } from "../../features/authSlice";
-import { InputField } from "./InputField";
+import { FormInputField } from "../generic/FormInputField";
 
 export const SignUpForm: FC = () => {
   const [username, setUsername] = useState("");
@@ -44,31 +44,31 @@ export const SignUpForm: FC = () => {
     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <InputField
+          <FormInputField
             onChange={(event) => setName(event.target.value)}
             label="Name"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <InputField
+          <FormInputField
             onChange={(e) => setUsername(e.target.value)}
             label="Username"
           />
         </Grid>
         <Grid item xs={12}>
-          <InputField
+          <FormInputField
             onChange={(e) => setEmail(e.target.value)}
             label="Email"
           />
         </Grid>
         <Grid item xs={12}>
-          <InputField
+          <FormInputField
             onChange={(e) => setPassword(e.target.value)}
             label="Password"
           />
         </Grid>
         <Grid item xs={12}>
-          <InputField
+          <FormInputField
             onChange={(e) => setConfirmPassword(e.target.value)}
             label="Confirm Password"
           />

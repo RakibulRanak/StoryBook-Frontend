@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import {
   Button,
-  TextField,
   FormControlLabel,
   Checkbox,
   Grid,
@@ -12,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
 import { signIn } from "../../features/authSlice";
 import { useState, useEffect } from "react";
+import { FormInputField } from "../generic/FormInputField";
 
 export const SignInForm: FC = () => {
   const [username, setUsername] = useState("");
@@ -35,34 +35,24 @@ export const SignInForm: FC = () => {
   };
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-      <TextField
-        margin="normal"
-        required
-        fullWidth
-        data-testid="usernameInput"
-        id="username"
-        label="Username"
-        name="username"
-        autoComplete="username"
-        autoFocus
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <TextField
-        margin="normal"
-        required
-        fullWidth
-        data-testid="passwordInput"
-        name="password"
-        label="Password"
-        type="password"
-        id="password"
-        autoComplete="current-password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <FormControlLabel
-        control={<Checkbox value="remember" color="primary" />}
-        label="Remember me"
-      />
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <FormInputField
+            label="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormInputField
+            label="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Grid>
+        <FormControlLabel
+          control={<Checkbox value="remember" color="primary" />}
+          label="Remember me"
+        />
+      </Grid>
       <Button
         type="submit"
         fullWidth

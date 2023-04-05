@@ -11,14 +11,13 @@ interface InputFieldProps {
   minLength?: number;
 }
 
-export const InputField: FC<InputFieldProps> = ({
+export const FormInputField: FC<InputFieldProps> = ({
   label,
   onChange,
   required = true,
   minLength,
 }) => {
   const mark = label.toLocaleLowerCase().split(" ").join("");
-  console.log(mark);
   return (
     <TextField
       onChange={onChange}
@@ -29,7 +28,7 @@ export const InputField: FC<InputFieldProps> = ({
       name={mark}
       type={mark}
       data-testid={`${mark}Input`}
-      //   autoComplete={mark}
+      autoComplete={mark}
       inputProps={{
         minLength,
       }}
