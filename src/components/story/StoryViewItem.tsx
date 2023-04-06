@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { fetchStoryById } from "../../features/storySlice";
 import { Typography, Box } from "@mui/material";
 import { format } from "date-fns";
-import AuthenticatedStoryActions from "./AuthenticatedStoryActions";
+import { AuthenticatedStoryActions } from "./AuthenticatedStoryActions";
 import { ParentStoryBox } from "./style";
 
 export const StoryViewItem: FC<StoryId> = ({ id }) => {

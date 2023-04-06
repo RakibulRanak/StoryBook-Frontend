@@ -4,7 +4,7 @@ import { AuthState, SignInPayload, SignUpPayload, User } from '../models/authMod
 
 const initialState: AuthState = {
     users: users,
-    username: 'RakibulRanak',
+    username: '',
     loggedIn: false,
     accessToken: ''
 }

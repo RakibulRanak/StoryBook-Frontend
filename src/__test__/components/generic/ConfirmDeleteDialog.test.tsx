@@ -1,8 +1,6 @@
 import React from "react";
 import { ConfirmDeleteDialog } from "../../../components/generic/ConfirmDeleteDialog";
-import { store } from "../../../app/store";
-import { Provider } from "react-redux";
-import ReactDom from "react-dom";
+
 import "@testing-library/jest-dom/extend-expect";
 //import { render } from "@testing-library/react";
 import { render, screen, fireEvent } from "@testing-library/react";

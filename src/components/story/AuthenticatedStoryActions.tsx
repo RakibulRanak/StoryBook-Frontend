@@ -8,14 +8,18 @@ import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
 import { Story } from "../../models/storyModel";
 import { deleteStory } from "../../features/storySlice";
 
-const AuthenticatedStoryActions: FC<Story> = ({ author, id, title, story }) => {
+export const AuthenticatedStoryActions: FC<Story> = ({
+  author,
+  id,
+  title,
+  story,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { username, loggedIn } = useAppSelector(
     (state: RootState) => state.auth
   );
-
   const renderEditButton = () => (
     <Edit
       onClick={() => setShowModal(true)}
@@ -69,5 +73,3 @@ const AuthenticatedStoryActions: FC<Story> = ({ author, id, title, story }) => {
     </>
   );
 };
-
-export default AuthenticatedStoryActions;
