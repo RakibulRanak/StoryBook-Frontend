@@ -24,7 +24,7 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
   const [disable, setDisable] = useState(true);
   const { username } = useAppSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
-  //document.getElementById("root")!.style.filter = "blur(3px)";
+  document.getElementById("root")!.style.filter = "blur(3px)";
 
   useEffect(() => {
     if (story && story.trim() && title && title.trim()) setDisable(false);

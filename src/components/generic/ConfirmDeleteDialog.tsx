@@ -1,4 +1,3 @@
-import { FC, useState } from "react";
 import {
   Button,
   Dialog,
@@ -7,18 +6,14 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material/";
-import { useAppDispatch } from "../../app/hook";
-import { deleteStory } from "../../features/storySlice";
 import { useNavigate } from "react-router-dom";
 
 export const ConfirmDeleteDialog = (props: any) => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleDelete = () => {
-    //setOpen(false)
     props.close();
-    dispatch(deleteStory(props.id));
+    props.submit();
     navigate("/");
   };
 
