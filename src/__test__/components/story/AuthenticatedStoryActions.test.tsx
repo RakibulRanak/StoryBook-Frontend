@@ -1,9 +1,9 @@
-import { AuthenticatedStoryActions } from "../../components/story/AuthenticatedStoryActions";
-import { store } from "../../app/store";
+import { AuthenticatedStoryActions } from "../../../components/story/AuthenticatedStoryActions";
+import { store } from "../../../app/store";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { signIn } from "../../features/authSlice";
+import { signIn } from "../../../features/authSlice";
 import { act } from "react-dom/test-utils";
 
 const testStory1 = {
