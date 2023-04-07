@@ -3,7 +3,7 @@ import Edit from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppSelector, useAppDispatch } from "../../app/hook";
 import { RootState } from "../../app/store";
-import StoryModal from "./StoryModal";
+import { StoryModal } from "./StoryModal";
 import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
 import { Story } from "../../models/storyModel";
 import { deleteStory } from "../../features/storySlice";

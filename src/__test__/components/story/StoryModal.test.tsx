@@ -1,5 +1,5 @@
 import React from "react";
-import StoryModal from "../../../components/story/StoryModal";
+import { StoryModal } from "../../../components/story/StoryModal";
 import { store } from "../../../app/store";
 import { Provider } from "react-redux";
 import ReactDom from "react-dom";

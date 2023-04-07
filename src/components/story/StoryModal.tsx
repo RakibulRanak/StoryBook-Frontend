@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { Box, TextareaAutosize, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
@@ -85,5 +85,3 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
     document.getElementById("portal")!
   );
 };
-
-export default StoryModal;

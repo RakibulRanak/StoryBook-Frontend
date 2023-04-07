@@ -3,7 +3,7 @@ import "../App.css";
 import { StoryPreviewList } from "../components/story/StoryPreviewList";
 import { useState } from "react";
 import { Box } from "@mui/material";
-import StoryModal from "../components/story/StoryModal";
+import { StoryModal } from "../components/story/StoryModal";
 import { RootState } from "../app/store";
 import { useAppSelector } from "../app/hook";
 import { HomeBox } from "./style";
