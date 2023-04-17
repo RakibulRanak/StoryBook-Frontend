@@ -6,7 +6,7 @@ import { RootState } from "../../app/store";
 import { StoryModal } from "./StoryModal";
 import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
 import { Story } from "../../models/storyModel";
-import { deleteStory } from "../../features/storySlice";
+import { useDeleteStoryMutation } from "../../services/storyApi";
 
 export const AuthenticatedStoryActions: FC<Story> = ({
   author,
@@ -16,6 +16,7 @@ export const AuthenticatedStoryActions: FC<Story> = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const [deleteStory] = useDeleteStoryMutation();
   const dispatch = useAppDispatch();
   const { username, loggedIn } = useAppSelector(
     (state: RootState) => state.auth
@@ -54,7 +55,7 @@ export const AuthenticatedStoryActions: FC<Story> = ({
         setOpen(false);
       }}
       submit={() => {
-        dispatch(deleteStory(id));
+        deleteStory(id);
       }}
       id={id}
     />

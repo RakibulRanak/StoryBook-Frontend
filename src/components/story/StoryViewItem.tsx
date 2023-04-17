@@ -1,40 +1,39 @@
 import React, { FC, useState } from "react";
 import "../../App.css";
-import { Story, StoryId } from "../../models/storyModel";
-import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { RootState } from "../../app/store";
-import { useEffect } from "react";
-import { fetchStoryById } from "../../features/storySlice";
+import { Story } from "../../models/storyModel";
 import { Typography, Box } from "@mui/material";
 import { format } from "date-fns";
 import { AuthenticatedStoryActions } from "./AuthenticatedStoryActions";
 import { ParentStoryBox } from "./style";
+import { useStoryQuery } from "../../services/storyApi";
 
-export const StoryViewItem: FC<StoryId> = ({ id }) => {
-  const { story: storyData } = useAppSelector(
-    (state: RootState) => state.story
-  );
-  const [loading, setLoading] = useState(true);
+export const StoryViewItem: FC<{ id: number }> = ({ id }) => {
+  const { data, error, isLoading, isFetching, isSuccess } = useStoryQuery(id);
 
-  const dispatch = useAppDispatch();
+  // const { story: storyData } = useAppSelector(
+  //   (state: RootState) => state.story
+  // );
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    console.log("MOUNt");
-    dispatch(fetchStoryById(id));
-    setLoading(false);
-  }, []);
+  // const dispatch = useAppDispatch();
 
-  if (loading) {
+  // useEffect(() => {
+  //   console.log("MOUNt");
+  //   dispatch(fetchStoryById(id));
+  //   setLoading(false);
+  // }, []);
+
+  if (isLoading) {
     return <Typography>Loading...</Typography>;
   }
-  if (!storyData) {
+  if (!data) {
     return (
       <Typography component="h1" variant="h3" color="inherit">
         Story Not Found
       </Typography>
     );
   }
-  const { story, title, author, postedAt }: Story = storyData;
+  const { story, title, author, postedAt }: Story = data.data;
 
   return (
     <ParentStoryBox>
@@ -42,7 +41,7 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
         <Typography component="h1" variant="h3" color="inherit">
           {title}
         </Typography>
-        <AuthenticatedStoryActions {...storyData} />
+        <AuthenticatedStoryActions {...data.data} />
       </Box>
       <Typography
         variant="h6"
@@ -58,7 +57,7 @@ export const StoryViewItem: FC<StoryId> = ({ id }) => {
         display="inline"
         style={{ marginLeft: "20px" }}
       >
-        {format(new Date(postedAt), "MMMM dd, yyyy")}
+        {postedAt}
       </Typography>
       <Typography
         variant="body1"

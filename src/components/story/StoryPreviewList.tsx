@@ -1,21 +1,11 @@
 import React, { FC, useState } from "react";
 import "../../App.css";
 import { StoryPreviewItem } from "./StoryPreviewItem";
-import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { RootState } from "../../app/store";
-import { fetchStories } from "../../features/storySlice";
-import { useEffect } from "react";
 import { Box, Grid, Typography } from "@mui/material";
+import { useStoriesQuery } from "../../services/storyApi";
 
 export const StoryPreviewList: FC = () => {
-  const { storyList } = useAppSelector((state: RootState) => state.story);
-  const [loading, setLoading] = useState(true);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchStories());
-    setLoading(false);
-  }, []);
+  const { data, error, isLoading, isFetching, isSuccess } = useStoriesQuery();
 
   const renderLoading = () => (
     <Box sx={{ width: "100%", textAlign: "center", marginTop: "10vh" }}>
@@ -25,11 +15,11 @@ export const StoryPreviewList: FC = () => {
 
   const renderStoryPreviews = () => (
     <Grid container sx={{ marginTop: "10vh" }}>
-      {storyList.map((story) => (
+      {data?.data.map((story) => (
         <StoryPreviewItem key={story.id} {...story} />
       ))}
     </Grid>
   );
 
-  return <>{loading ? renderLoading() : renderStoryPreviews()}</>;
+  return <>{isLoading ? renderLoading() : renderStoryPreviews()}</>;
 };

@@ -1,23 +1,22 @@
-export interface BaseStory {
-    author: string;
+export interface AddStory {
     title: string;
     story: string;
 }
-
-export interface Story extends BaseStory {
+export interface UpdateStory extends AddStory {
     id: number;
-    postedAt: string;
+}
+export interface Story extends UpdateStory {
+    author : string;
+    postedAt : string;
 }
 
-export interface StoryList {
-    storyList: Story[];
+export interface Response {
+    message : string;
+}
+export interface StoryResponse extends Response {
+    data: Story;
 }
 
-export interface StoryState {
-    storyList: Story[];
-    story: Story | undefined;
-}
-
-export type StoryId = {
-    id: number
+export interface StoriesResponse extends Response {
+    data : Story[] 
 }

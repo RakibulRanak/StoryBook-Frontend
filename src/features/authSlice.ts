@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import users from '../storage/users.json'
-import { AuthState, SignInPayload, SignUpPayload, User } from '../models/authModel'
+import { AuthState, SignInPayload, SignUpPayload, User } from '../models/userModel'
 
 const initialState: AuthState = {
     users: users,
