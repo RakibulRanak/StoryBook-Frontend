@@ -5,7 +5,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useStoriesQuery } from "../../services/storyApi";
 
 export const StoryPreviewList: FC = () => {
-  const { data, error, isLoading, isFetching, isSuccess } = useStoriesQuery();
+  const { data, isLoading } = useStoriesQuery();
 
   const renderLoading = () => (
     <Box sx={{ width: "100%", textAlign: "center", marginTop: "10vh" }}>

@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { Typography, Box } from "@mui/material";
 import { Story } from "../../models/storyModel";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
 import { AuthenticatedStoryActions } from "./AuthenticatedStoryActions";
 import { ParentStoryBox, StoryPreviewTypography } from "./style";
 
@@ -37,7 +36,7 @@ export const StoryPreviewItem: FC<Story> = (storyData) => {
         display="inline"
         style={{ marginLeft: "20px" }}
       >
-        {postedAt}
+        {new Date(postedAt).toLocaleString()}
       </Typography>
       <Box sx={{ marginTop: "20px", overflow: "hidden" }}>
         <StoryPreviewTypography>{story}</StoryPreviewTypography>

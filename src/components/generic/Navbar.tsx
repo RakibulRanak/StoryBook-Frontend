@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
 import { removeUser } from "../../features/authSlice";
-import { useSignInMutation, useSignOutMutation } from "../../services/authApi";
+import { useSignOutMutation } from "../../services/authApi";
 
 const LoggedInContent: FC<{ username: string; handleLogout: () => void }> = ({
   username,

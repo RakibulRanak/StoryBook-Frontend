@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import users from "../storage/users.json";
-import {
-  AuthState,
-  SignInPayload,
-  SignUpPayload,
-  SetUser,
-  AccessToken,
-} from "../models/userModel";
+import { AuthState, SetUser, AccessToken } from "../models/authModel";
 
 const initialState: AuthState = {
   username: localStorage.getItem("username") || "",
@@ -23,7 +16,6 @@ const authSlice = createSlice({
       state.access_token = action.payload.access_token;
     },
     setUser: (state: AuthState, action: PayloadAction<SetUser>) => {
-      /// first api call to backend, if successful reuturns with jwt refresh token and access token, access token saved in state, refresh token in storage
       state.username = action.payload.username;
       state.loggedIn = action.payload.loggedIn;
       state.access_token = action.payload.access_token;

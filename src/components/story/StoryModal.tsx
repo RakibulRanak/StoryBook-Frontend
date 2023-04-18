@@ -24,7 +24,6 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
   const [disable, setDisable] = useState(true);
   const [addStory] = useAddStoryMutation();
   const [updateStory] = useUpdateStoryMutation();
-  const { username } = useAppSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
   document.getElementById("root")!.style.filter = "blur(3px)";
 

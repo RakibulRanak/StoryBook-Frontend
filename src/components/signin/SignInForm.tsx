@@ -1,12 +1,5 @@
 import React, { FC } from "react";
-import {
-  Button,
-  FormControlLabel,
-  Checkbox,
-  Grid,
-  Box,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, Box, Typography, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
 import { setUser } from "../../features/authSlice";
@@ -18,8 +11,8 @@ export const SignInForm: FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disable, setDisable] = useState(false);
-  const [signIn, { data, isLoading, isSuccess, isError, error }] =
-    useSignInMutation();
+  const [myError, setMyError] = useState("");
+  const [signIn] = useSignInMutation();
 
   useEffect(() => {
     if (username && username.trim() && password && password.trim())
@@ -27,28 +20,28 @@ export const SignInForm: FC = () => {
     else setDisable(true);
   }, [username, password]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(
-        setUser({
-          username,
-          loggedIn: true,
-          access_token: data?.data.access_token,
-          refresh_token: data?.data.refresh_token,
-        })
-      );
-      // console.log(">>", data?.data);
-      navigate("/");
-    }
-  }, [isSuccess]);
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // dispatch(signIn({ username, password }));
-    signIn({ username, password });
+    try {
+      await signIn({ username, password })
+        .unwrap()
+        .then((data) => {
+          dispatch(
+            setUser({
+              username,
+              loggedIn: true,
+              access_token: data?.data.access_token,
+              refresh_token: data?.data.refresh_token,
+            })
+          );
+          navigate("/");
+        });
+    } catch (err: any) {
+      setMyError(err.data.message);
+    }
   };
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -65,11 +58,8 @@ export const SignInForm: FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Grid>
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
       </Grid>
+      <Box mt={2}>{myError && <Alert severity="error">{myError}</Alert>}</Box>
       <Button
         type="submit"
         fullWidth

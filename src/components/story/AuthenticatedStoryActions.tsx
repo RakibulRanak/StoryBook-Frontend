@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import Edit from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useAppSelector, useAppDispatch } from "../../app/hook";
+import { useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
 import { StoryModal } from "./StoryModal";
 import { ConfirmDeleteDialog } from "../generic/ConfirmDeleteDialog";
@@ -17,7 +17,6 @@ export const AuthenticatedStoryActions: FC<Story> = ({
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [deleteStory] = useDeleteStoryMutation();
-  const dispatch = useAppDispatch();
   const { username, loggedIn } = useAppSelector(
     (state: RootState) => state.auth
   );

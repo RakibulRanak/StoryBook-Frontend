@@ -1,8 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
-import { Button, TextField, Grid, Box, Typography } from "@mui/material";
+import { Button, Grid, Box, Typography, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../app/hook";
-
 import { FormInputField } from "../generic/FormInputField";
 import { useSignUpMutation } from "../../services/authApi";
 
@@ -13,9 +11,8 @@ export const SignUpForm: FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [disable, setDisable] = useState(false);
-  const [signUp, { data, isSuccess, isError, error }] = useSignUpMutation();
-
-  const dispatch = useAppDispatch();
+  const [signUp] = useSignUpMutation();
+  const [myError, setMyError] = useState("");
 
   useEffect(() => {
     if (
@@ -34,17 +31,34 @@ export const SignUpForm: FC = () => {
     else setDisable(true);
   }, [username, password, name, email, confirmPassword]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      console.log("successful");
-      navigate("/signin");
-    }
-  }, [isSuccess]);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await signUp({ email, password, username, confirmPassword, name });
+    try {
+      await signUp({
+        email,
+        password,
+        username,
+        confirmPassword,
+        name,
+      })
+        .unwrap()
+        .then(() => {
+          navigate("/signin");
+        });
+    } catch (err: any) {
+      const firstError = err.data.errors ? err.data.errors[0] : null;
+      setMyError(
+        err.data.message ||
+          firstError.email ||
+          firstError.password ||
+          firstError.username ||
+          firstError.confirmPassword ||
+          firstError.name
+      );
+      console.log(myError);
+    }
   };
 
   return (
@@ -81,6 +95,7 @@ export const SignUpForm: FC = () => {
           />
         </Grid>
       </Grid>
+      <Box mt={2}>{myError && <Alert severity="error">{myError}</Alert>}</Box>
       <Button
         disabled={disable}
         type="submit"

@@ -7,7 +7,7 @@ import {
 } from "../models/storyModel";
 import baseQueryWithReauth from "../rtk/baseQueryWithReauth";
 
-export const storiesApi = createApi({
+export const storyApi = createApi({
   reducerPath: "storyApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Story"],
@@ -52,4 +52,4 @@ export const {
   useAddStoryMutation,
   useUpdateStoryMutation,
   useDeleteStoryMutation,
-} = storiesApi;
+} = storyApi;

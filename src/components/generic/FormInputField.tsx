@@ -3,7 +3,6 @@ import { TextField } from "@mui/material";
 
 interface InputFieldProps {
   label: string;
-
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   type?: string;
@@ -26,7 +25,7 @@ export const FormInputField: FC<InputFieldProps> = ({
       id={mark}
       label={label}
       name={mark}
-      type={mark}
+      type={mark === "confirmpassword" ? "password" : mark}
       data-testid={`${mark}Input`}
       autoComplete={mark}
       inputProps={{

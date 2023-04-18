@@ -2,26 +2,12 @@ import React, { FC, useState } from "react";
 import "../../App.css";
 import { Story } from "../../models/storyModel";
 import { Typography, Box } from "@mui/material";
-import { format } from "date-fns";
 import { AuthenticatedStoryActions } from "./AuthenticatedStoryActions";
 import { ParentStoryBox } from "./style";
 import { useStoryQuery } from "../../services/storyApi";
 
 export const StoryViewItem: FC<{ id: number }> = ({ id }) => {
-  const { data, error, isLoading, isFetching, isSuccess } = useStoryQuery(id);
-
-  // const { story: storyData } = useAppSelector(
-  //   (state: RootState) => state.story
-  // );
-  // const [loading, setLoading] = useState(true);
-
-  // const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   console.log("MOUNt");
-  //   dispatch(fetchStoryById(id));
-  //   setLoading(false);
-  // }, []);
+  const { data, isLoading } = useStoryQuery(id);
 
   if (isLoading) {
     return <Typography>Loading...</Typography>;
@@ -57,7 +43,7 @@ export const StoryViewItem: FC<{ id: number }> = ({ id }) => {
         display="inline"
         style={{ marginLeft: "20px" }}
       >
-        {postedAt}
+        {new Date(postedAt).toLocaleString()}
       </Typography>
       <Typography
         variant="body1"

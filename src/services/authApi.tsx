@@ -1,11 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import {
   SignInPayload,
   SignUpPayload,
   RefreshToken,
   AccessToken,
   SignInResponse,
-} from "../models/userModel";
+} from "../models/authModel";
 import baseQueryWithReauth from "../rtk/baseQueryWithReauth";
 
 export const authApi = createApi({

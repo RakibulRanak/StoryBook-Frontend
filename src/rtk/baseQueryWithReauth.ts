@@ -44,7 +44,6 @@ const baseQueryWithReauth: BaseQueryFn<
           api,
           extraOptions
         );
-        console.log("new access token", refreshResult);
         if (refreshResult.data) {
           // store the new token
           api.dispatch(setNewAccessToken(refreshResult.data));
