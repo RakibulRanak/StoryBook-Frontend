@@ -2,9 +2,6 @@ import React, { FC } from "react";
 import { Box, TextareaAutosize, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
-
-import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { RootState } from "../../app/store";
 import { my_modal, text_area } from "./style";
 import {
   useAddStoryMutation,
@@ -24,7 +21,6 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
   const [disable, setDisable] = useState(true);
   const [addStory] = useAddStoryMutation();
   const [updateStory] = useUpdateStoryMutation();
-  const dispatch = useAppDispatch();
   document.getElementById("root")!.style.filter = "blur(3px)";
 
   useEffect(() => {

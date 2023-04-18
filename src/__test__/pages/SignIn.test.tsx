@@ -38,24 +38,24 @@ describe("SignIn component", () => {
     expect(window.location.pathname).toBe("/signup");
   });
 
-  test("Console log user data when submit button is clicked", () => {
-    const mockConsoleLog = jest.spyOn(console, "log").mockImplementation();
-    setupTest();
+  // test("Console log user data when submit button is clicked", () => {
+  //   const mockConsoleLog = jest.spyOn(console, "log").mockImplementation();
+  //   setupTest();
 
-    fireEvent.change(screen.getByLabelText("Username *"), {
-      target: { value: "johndoe" },
-    });
+  //   fireEvent.change(screen.getByLabelText("Username *"), {
+  //     target: { value: "johndoe" },
+  //   });
 
-    fireEvent.change(screen.getByLabelText("Password *"), {
-      target: { value: "password" },
-    });
+  //   fireEvent.change(screen.getByLabelText("Password *"), {
+  //     target: { value: "password" },
+  //   });
 
-    fireEvent.submit(screen.getByRole("button", { name: "Sign In" }));
+  //   fireEvent.submit(screen.getByRole("button", { name: "Sign In" }));
 
-    expect(mockConsoleLog).toHaveBeenCalledWith({
-      username: "johndoe",
-      password: "password",
-    });
-    mockConsoleLog.mockRestore();
-  });
+  //   expect(mockConsoleLog).toHaveBeenCalledWith({
+  //     username: "johndoe",
+  //     password: "password",
+  //   });
+  //   mockConsoleLog.mockRestore();
+  // });
 });

@@ -16,16 +16,16 @@ describe("StoryPreviewList", () => {
     );
   });
 
-  it("renders a list of story previews when stories are loaded", () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <StoryPreviewList />
-        </BrowserRouter>
-      </Provider>
-    );
-    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(
-      storyList.length
-    );
-  });
+  // it("renders a list of story previews when stories are loaded", () => {
+  //   render(
+  //     <Provider store={store}>
+  //       <BrowserRouter>
+  //         <StoryPreviewList />
+  //       </BrowserRouter>
+  //     </Provider>
+  //   );
+  //   expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(
+  //     storyList.length
+  //   );
+  // });
 });

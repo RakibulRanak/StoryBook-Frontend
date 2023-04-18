@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import "../../App.css";
 import { Story } from "../../models/storyModel";
 import { Typography, Box } from "@mui/material";
@@ -8,7 +8,6 @@ import { useStoryQuery } from "../../services/storyApi";
 
 export const StoryViewItem: FC<{ id: number }> = ({ id }) => {
   const { data, isLoading } = useStoryQuery(id);
-
   if (isLoading) {
     return <Typography>Loading...</Typography>;
   }
