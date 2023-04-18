@@ -9,14 +9,17 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
-import { signIn } from "../../features/authSlice";
+import { setUser } from "../../features/authSlice";
 import { useState, useEffect } from "react";
 import { FormInputField } from "../generic/FormInputField";
+import { useSignInMutation } from "../../services/authApi";
 
 export const SignInForm: FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disable, setDisable] = useState(false);
+  const [signIn, { data, isLoading, isSuccess, isError, error }] =
+    useSignInMutation();
 
   useEffect(() => {
     if (username && username.trim() && password && password.trim())
@@ -24,14 +27,28 @@ export const SignInForm: FC = () => {
     else setDisable(true);
   }, [username, password]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(
+        setUser({
+          username,
+          loggedIn: true,
+          access_token: data?.data.access_token,
+          refresh_token: data?.data.refresh_token,
+        })
+      );
+      // console.log(">>", data?.data);
+      navigate("/");
+    }
+  }, [isSuccess]);
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(signIn({ username, password }));
-    console.log({ username, password });
-    navigate("/");
+    // dispatch(signIn({ username, password }));
+    signIn({ username, password });
   };
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>

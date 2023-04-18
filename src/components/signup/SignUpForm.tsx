@@ -2,8 +2,9 @@ import React, { FC, useState, useEffect } from "react";
 import { Button, TextField, Grid, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
-import { signUp } from "../../features/authSlice";
+
 import { FormInputField } from "../generic/FormInputField";
+import { useSignUpMutation } from "../../services/authApi";
 
 export const SignUpForm: FC = () => {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ export const SignUpForm: FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [disable, setDisable] = useState(false);
+  const [signUp, { data, isSuccess, isError, error }] = useSignUpMutation();
 
   const dispatch = useAppDispatch();
 
@@ -32,12 +34,17 @@ export const SignUpForm: FC = () => {
     else setDisable(true);
   }, [username, password, name, email, confirmPassword]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      console.log("successful");
+      navigate("/signin");
+    }
+  }, [isSuccess]);
   const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(signUp({ email, password, username, confirmPassword, name }));
-    navigate("/signin");
+    await signUp({ email, password, username, confirmPassword, name });
   };
 
   return (

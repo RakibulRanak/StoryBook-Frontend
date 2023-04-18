@@ -1,15 +1,15 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import {
-  Story,
   StoriesResponse,
   StoryResponse,
   AddStory,
   UpdateStory,
 } from "../models/storyModel";
+import baseQueryWithReauth from "../rtk/baseQueryWithReauth";
 
 export const storiesApi = createApi({
   reducerPath: "storyApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/v1/" }),
+  baseQuery: baseQueryWithReauth,
   tagTypes: ["Story"],
   endpoints: (builder) => ({
     stories: builder.query<StoriesResponse, void>({

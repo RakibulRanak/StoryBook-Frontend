@@ -9,15 +9,32 @@ export interface SignUpPayload extends SignInPayload {
     confirmPassword: string;
 }
 
+export interface RefreshToken {
+    refresh_token: string;
+}
+export interface AccessToken {
+    access_token: string;
+}
+
+
 export interface User extends SignInPayload {
     name: string;
     email: string;
 }
-
+export interface Token {
+    access_token : string;
+    refresh_token : string;
+}
+export interface SignInResponse {
+    data : Token
+}
 // after implementing apis, users : User[] will be removed
 export interface AuthState {
-    users: User[]
     username?: string;
     loggedIn: boolean;
-    accessToken?: string;
+    access_token?: string;
+}
+
+export interface SetUser extends AuthState {
+    refresh_token?: string;
 }

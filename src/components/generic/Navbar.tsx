@@ -11,7 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
-import { signOut } from "../../features/authSlice";
+import { removeUser } from "../../features/authSlice";
 
 const LoggedInContent: FC<{ username: string; handleLogout: () => void }> = ({
   username,
@@ -44,7 +44,7 @@ export const Navbar: FC = () => {
   );
   const dispatch = useAppDispatch();
   const handleLogout = () => {
-    dispatch(signOut());
+    dispatch(removeUser());
   };
 
   const handleLogin = () => {
