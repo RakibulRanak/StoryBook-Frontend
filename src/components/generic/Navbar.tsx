@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { RootState } from "../../app/store";
 import { removeUser } from "../../features/authSlice";
+import { useSignInMutation, useSignOutMutation } from "../../services/authApi";
 
 const LoggedInContent: FC<{ username: string; handleLogout: () => void }> = ({
   username,
@@ -38,12 +39,14 @@ const LoggedOutContent: FC<{ handleLogin: () => void }> = ({ handleLogin }) => {
 };
 
 export const Navbar: FC = () => {
+  const [signOut] = useSignOutMutation();
   const navigate = useNavigate();
   const { username, loggedIn } = useAppSelector(
     (state: RootState) => state.auth
   );
   const dispatch = useAppDispatch();
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await signOut();
     dispatch(removeUser());
   };
 

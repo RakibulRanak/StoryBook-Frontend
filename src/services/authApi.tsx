@@ -6,15 +6,15 @@ import {
   AccessToken,
   SignInResponse,
 } from "../models/userModel";
+import baseQueryWithReauth from "../rtk/baseQueryWithReauth";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/v1/" }),
+  baseQuery: baseQueryWithReauth,
   tagTypes: ["User"],
   endpoints: (builder) => ({
     newAccessToken: builder.query<AccessToken, RefreshToken>({
       query: () => "/token",
-      providesTags: ["User"],
     }),
     signIn: builder.mutation<SignInResponse, SignInPayload>({
       query: (body) => ({
@@ -22,7 +22,6 @@ export const authApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"],
     }),
     signUp: builder.mutation<void, SignUpPayload>({
       query: (body) => ({
@@ -31,21 +30,15 @@ export const authApi = createApi({
         body,
       }),
     }),
-    //req body te refres_token nite hobe
-    signOut: builder.mutation<void, RefreshToken>({
-      query: (body) => ({
+    signOut: builder.mutation<void, void>({
+      query: () => ({
         url: "/users/logout",
         method: "POST",
-        body,
+        body: { refresh_token: localStorage.getItem("refresh_token") || null },
       }),
-      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const {
-  useSignInMutation,
-  useSignUpMutation,
-  useSignOutMutation,
-  useNewAccessTokenQuery,
-} = authApi;
+export const { useSignInMutation, useSignUpMutation, useSignOutMutation } =
+  authApi;
