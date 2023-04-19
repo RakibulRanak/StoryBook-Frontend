@@ -9,7 +9,8 @@ import { Mutex } from "async-mutex";
 import { removeUser, setNewAccessToken } from "../features/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8000/api/v1/",
+  baseUrl: process.env.REACT_APP_BACKEND_URL,
+  mode: "cors",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.access_token;
     if (token) {

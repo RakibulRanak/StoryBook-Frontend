@@ -40,6 +40,7 @@ export const SignInForm: FC = () => {
           navigate("/");
         });
     } catch (err: any) {
+      console.log(err);
       setMyError(err.data.message);
     }
   };
