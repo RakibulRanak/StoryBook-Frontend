@@ -15,7 +15,7 @@ export const StoryViewItem: FC<{ id: number }> = ({ id }) => {
           width: "100%",
           textAlign: "center",
           marginTop: "10vh",
-          paddingX: 70,
+          paddingX: "30vw",
           paddingY: 10,
         }}
       >
