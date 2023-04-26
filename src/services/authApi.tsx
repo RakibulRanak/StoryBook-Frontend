@@ -30,11 +30,11 @@ export const authApi = createApi({
         body,
       }),
     }),
-    signOut: builder.mutation<void, void>({
-      query: () => ({
+    signOut: builder.mutation<void, RefreshToken>({
+      query: (body) => ({
         url: "/users/logout",
         method: "POST",
-        body: { refresh_token: localStorage.getItem("refresh_token") || null },
+        body,
       }),
     }),
   }),

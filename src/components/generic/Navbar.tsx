@@ -45,8 +45,10 @@ export const Navbar: FC = () => {
     (state: RootState) => state.auth
   );
   const dispatch = useAppDispatch();
-  const handleLogout = async () => {
-    await signOut();
+  const handleLogout = () => {
+    signOut({
+      refresh_token: localStorage.getItem("refresh_token") || "false_token",
+    });
     dispatch(removeUser());
   };
 

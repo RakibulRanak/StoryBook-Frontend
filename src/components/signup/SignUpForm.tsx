@@ -3,6 +3,7 @@ import { Button, Grid, Box, Typography, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { FormInputField } from "../generic/FormInputField";
 import { useSignUpMutation } from "../../services/authApi";
+import { LoadingButton } from "@mui/lab";
 
 export const SignUpForm: FC = () => {
   const [username, setUsername] = useState("");
@@ -11,7 +12,7 @@ export const SignUpForm: FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [disable, setDisable] = useState(false);
-  const [signUp] = useSignUpMutation();
+  const [signUp, { isLoading }] = useSignUpMutation();
   const [myError, setMyError] = useState("");
 
   useEffect(() => {
@@ -96,15 +97,17 @@ export const SignUpForm: FC = () => {
         </Grid>
       </Grid>
       <Box mt={2}>{myError && <Alert severity="error">{myError}</Alert>}</Box>
-      <Button
+      <LoadingButton
         disabled={disable}
         type="submit"
         fullWidth
+        loading={isLoading}
         variant="contained"
+        loadingIndicator="Sigining Up..."
         sx={{ mt: 3, mb: 2 }}
       >
         Sign Up
-      </Button>
+      </LoadingButton>
       <Grid container justifyContent="center">
         <Grid item onClick={() => navigate("/signin")}>
           <Typography

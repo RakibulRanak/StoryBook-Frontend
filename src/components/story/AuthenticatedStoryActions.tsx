@@ -16,7 +16,7 @@ export const AuthenticatedStoryActions: FC<Story> = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
-  const [deleteStory] = useDeleteStoryMutation();
+  const [deleteStory, { isLoading }] = useDeleteStoryMutation();
   const { username, loggedIn } = useAppSelector(
     (state: RootState) => state.auth
   );
@@ -53,10 +53,11 @@ export const AuthenticatedStoryActions: FC<Story> = ({
       close={() => {
         setOpen(false);
       }}
-      submit={() => {
-        deleteStory(id);
+      submit={async () => {
+        await deleteStory(id);
       }}
       id={id}
+      isLoading={isLoading}
     />
   );
 

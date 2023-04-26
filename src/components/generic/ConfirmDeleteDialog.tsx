@@ -7,13 +7,14 @@ import {
   DialogTitle,
 } from "@mui/material/";
 import { useNavigate } from "react-router-dom";
+import { LoadingButton } from "@mui/lab";
 
 export const ConfirmDeleteDialog = (props: any) => {
   const navigate = useNavigate();
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
+    await props.submit();
     props.close();
-    props.submit();
     navigate("/");
   };
 
@@ -35,9 +36,15 @@ export const ConfirmDeleteDialog = (props: any) => {
           <Button onClick={props.close} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleDelete} color="secondary" autoFocus>
+          <LoadingButton
+            loadingIndicator="Deleting..."
+            loading={props.isLoading}
+            onClick={handleDelete}
+            color="secondary"
+            autoFocus
+          >
             Delete
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
     </div>

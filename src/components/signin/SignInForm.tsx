@@ -6,13 +6,14 @@ import { setUser } from "../../features/authSlice";
 import { useState, useEffect } from "react";
 import { FormInputField } from "../generic/FormInputField";
 import { useSignInMutation } from "../../services/authApi";
+import { LoadingButton } from "@mui/lab";
 
 export const SignInForm: FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disable, setDisable] = useState(false);
   const [myError, setMyError] = useState("");
-  const [signIn] = useSignInMutation();
+  const [signIn, { isLoading }] = useSignInMutation();
 
   useEffect(() => {
     if (username && username.trim() && password && password.trim())
@@ -61,15 +62,17 @@ export const SignInForm: FC = () => {
         </Grid>
       </Grid>
       <Box mt={2}>{myError && <Alert severity="error">{myError}</Alert>}</Box>
-      <Button
+      <LoadingButton
         type="submit"
+        loadingIndicator="Sigining In..."
         fullWidth
         variant="contained"
+        loading={isLoading}
         sx={{ mt: 3, mb: 2 }}
         disabled={disable}
       >
         Sign In
-      </Button>
+      </LoadingButton>
       <Grid container justifyContent="center">
         <Grid item onClick={() => navigate("/signup")}>
           <Typography

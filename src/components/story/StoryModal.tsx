@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import { Box, TextareaAutosize, Button } from "@mui/material";
+import { Box, TextareaAutosize, Button, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
 import { my_modal, text_area } from "./style";
+import { LoadingButton } from "@mui/lab";
 import {
   useAddStoryMutation,
   useUpdateStoryMutation,
@@ -19,8 +20,9 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
   const [title, setTitle] = useState(props.title || "");
   const [story, setStory] = useState(props.story || "");
   const [disable, setDisable] = useState(true);
-  const [addStory] = useAddStoryMutation();
-  const [updateStory] = useUpdateStoryMutation();
+  const [addStory, { isLoading: isPostStoryLoading }] = useAddStoryMutation();
+  const [updateStory, { isLoading: isUpdateStoryLoading }] =
+    useUpdateStoryMutation();
   document.getElementById("root")!.style.filter = "blur(3px)";
 
   useEffect(() => {
@@ -28,18 +30,19 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
     else setDisable(true);
   }, [story, title]);
 
-  const handlePostSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+  const handlePostSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    props.close();
+    await addStory({ title, story });
     setTitle("");
     setStory("");
-    addStory({ title, story });
+    props.close();
     setDisable(true);
   };
-  const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+
+  const handleUpdateSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    await updateStory({ id: props.id!, title, story });
     props.close();
-    updateStory({ id: props.id!, title, story });
     setDisable(true);
   };
 
@@ -62,16 +65,19 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
           value={story}
           onChange={(e) => setStory(e.target.value)}
         />
-        <Button
+        <LoadingButton
+          sx={{ width: 120 }}
           type="submit"
           disabled={disable}
+          loadingIndicator={props.id ? "Updating..." : "Posting"}
+          loading={isPostStoryLoading || isUpdateStoryLoading}
           variant="contained"
           color="primary"
           onClick={props.id ? handleUpdateSubmit : handlePostSubmit}
         >
           {props.id ? "UPDATE" : "POST"}
-        </Button>
-        <Button variant="outlined" onClick={props.close}>
+        </LoadingButton>
+        <Button variant="outlined" sx={{ width: 120 }} onClick={props.close}>
           Cancel
         </Button>
       </Box>
