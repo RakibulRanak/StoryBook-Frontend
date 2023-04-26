@@ -102,8 +102,9 @@ export const SignUpForm: FC = () => {
         type="submit"
         fullWidth
         loading={isLoading}
+        endIcon={<> </>}
+        loadingPosition="end"
         variant="contained"
-        loadingIndicator="Sigining Up..."
         sx={{ mt: 3, mb: 2 }}
       >
         Sign Up

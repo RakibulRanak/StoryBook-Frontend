@@ -1,15 +1,23 @@
 import React, { FC } from "react";
 import "../../App.css";
 import { StoryPreviewItem } from "./StoryPreviewItem";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, LinearProgress } from "@mui/material";
 import { useStoriesQuery } from "../../services/storyApi";
 
 export const StoryPreviewList: FC = () => {
-  const { data, isLoading } = useStoriesQuery();
+  const { data, isFetching } = useStoriesQuery();
 
   const renderLoading = () => (
-    <Box sx={{ width: "100%", textAlign: "center", marginTop: "10vh" }}>
-      <Typography>Loading...</Typography>
+    <Box
+      sx={{
+        width: "100%",
+        textAlign: "center",
+        marginTop: "10vh",
+        paddingX: 70,
+        paddingY: 25,
+      }}
+    >
+      <LinearProgress />
     </Box>
   );
 
@@ -21,5 +29,5 @@ export const StoryPreviewList: FC = () => {
     </Grid>
   );
 
-  return <>{isLoading ? renderLoading() : renderStoryPreviews()}</>;
+  return <>{isFetching ? renderLoading() : renderStoryPreviews()}</>;
 };

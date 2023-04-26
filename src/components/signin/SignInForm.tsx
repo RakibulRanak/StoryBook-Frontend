@@ -45,6 +45,7 @@ export const SignInForm: FC = () => {
       setMyError(err.data.message);
     }
   };
+
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
       <Grid container spacing={2}>
@@ -64,7 +65,8 @@ export const SignInForm: FC = () => {
       <Box mt={2}>{myError && <Alert severity="error">{myError}</Alert>}</Box>
       <LoadingButton
         type="submit"
-        loadingIndicator="Sigining In..."
+        endIcon={<> </>}
+        loadingPosition="end"
         fullWidth
         variant="contained"
         loading={isLoading}

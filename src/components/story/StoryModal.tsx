@@ -69,7 +69,7 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
           sx={{ width: 120 }}
           type="submit"
           disabled={disable}
-          loadingIndicator={props.id ? "Updating..." : "Posting"}
+          loadingIndicator={props.id ? "Updating..." : "Posting..."}
           loading={isPostStoryLoading || isUpdateStoryLoading}
           variant="contained"
           color="primary"

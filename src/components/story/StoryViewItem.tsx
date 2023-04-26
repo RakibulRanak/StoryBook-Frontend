@@ -1,15 +1,27 @@
 import React, { FC } from "react";
 import "../../App.css";
 import { Story } from "../../models/storyModel";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, LinearProgress } from "@mui/material";
 import { AuthenticatedStoryActions } from "./AuthenticatedStoryActions";
 import { ParentStoryBox } from "./style";
 import { useStoryQuery } from "../../services/storyApi";
 
 export const StoryViewItem: FC<{ id: number }> = ({ id }) => {
-  const { data, isLoading } = useStoryQuery(id);
-  if (isLoading) {
-    return <Typography>Loading...</Typography>;
+  const { data, isFetching } = useStoryQuery(id);
+  if (isFetching) {
+    return (
+      <Box
+        sx={{
+          width: "100%",
+          textAlign: "center",
+          marginTop: "10vh",
+          paddingX: 70,
+          paddingY: 10,
+        }}
+      >
+        <LinearProgress />
+      </Box>
+    );
   }
   if (!data) {
     return (
