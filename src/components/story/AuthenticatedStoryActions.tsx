@@ -54,7 +54,7 @@ export const AuthenticatedStoryActions: FC<Story> = ({
         setOpen(false);
       }}
       submit={async () => {
-        await deleteStory(id);
+        await deleteStory(id).unwrap();
       }}
       id={id}
       isLoading={isLoading}

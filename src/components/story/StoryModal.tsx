@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
 import { my_modal, text_area } from "./style";
 import { LoadingButton } from "@mui/lab";
+import { ShowErrorAlert } from "../generic/ShowErrorAlert";
 import {
   useAddStoryMutation,
   useUpdateStoryMutation,
@@ -20,6 +21,7 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
   const [title, setTitle] = useState(props.title || "");
   const [story, setStory] = useState(props.story || "");
   const [disable, setDisable] = useState(true);
+  const [error, setError] = useState("");
   const [addStory, { isLoading: isPostStoryLoading }] = useAddStoryMutation();
   const [updateStory, { isLoading: isUpdateStoryLoading }] =
     useUpdateStoryMutation();
@@ -32,19 +34,32 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
 
   const handlePostSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await addStory({ title, story });
-    setTitle("");
-    setStory("");
-    props.close();
-    setDisable(true);
+    try {
+      setDisable(true);
+      await addStory({ title, story }).unwrap();
+      setTitle("");
+      setStory("");
+      props.close();
+    } catch (e) {
+      setError("Something Went Wrong! Try Again Later");
+    }
   };
 
   const handleUpdateSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await updateStory({ id: props.id!, title, story });
-    props.close();
-    setDisable(true);
+    try {
+      setDisable(true);
+      await updateStory({ id: props.id!, title, story }).unwrap();
+      props.close();
+    } catch (e) {
+      setError("Something Went Wrong! Try Again Later");
+    }
   };
+
+  if (error) {
+    document.getElementById("root")!.style.filter = "none";
+    return <ShowErrorAlert message={error} />;
+  }
 
   return ReactDom.createPortal(
     <Box sx={my_modal}>
@@ -81,6 +96,7 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
           Cancel
         </Button>
       </Box>
+      {/* {error && <ShowErrorAlert message={error!} />} */}
     </Box>,
     document.getElementById("portal")!
   );

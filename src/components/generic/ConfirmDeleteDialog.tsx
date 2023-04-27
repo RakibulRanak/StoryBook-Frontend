@@ -8,15 +8,24 @@ import {
 } from "@mui/material/";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
+import { ShowErrorAlert } from "./ShowErrorAlert";
+import { useState } from "react";
 
 export const ConfirmDeleteDialog = (props: any) => {
   const navigate = useNavigate();
-
+  const [error, setError] = useState("");
   const handleDelete = async () => {
-    await props.submit();
-    props.close();
-    navigate("/");
+    try {
+      await props.submit();
+      props.close();
+      navigate("/");
+    } catch (e) {
+      setError("Something Went Wrong! Try Again Later");
+      setTimeout(() => props.close(), 3000);
+    }
   };
+
+  if (error) return <ShowErrorAlert message={error} />;
 
   return (
     <div>

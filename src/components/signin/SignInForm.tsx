@@ -41,8 +41,11 @@ export const SignInForm: FC = () => {
           navigate("/");
         });
     } catch (err: any) {
-      console.log(err);
-      setMyError(err.data.message);
+      const message =
+        err && "data" in err
+          ? err.data.message
+          : "Something Went Wrong! Try Again Later";
+      setMyError(message);
     }
   };
 

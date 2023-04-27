@@ -49,14 +49,19 @@ export const SignUpForm: FC = () => {
           navigate("/signin");
         });
     } catch (err: any) {
-      const firstError = err.data.errors ? err.data.errors[0] : null;
+      const firstError =
+        err && "data" in err && !("message" in err.data)
+          ? err.data.errors[0]
+          : "Something Went Wrong! Try Again Later";
+
       setMyError(
-        err.data.message ||
+        err.data?.message! ||
           firstError.email ||
           firstError.password ||
           firstError.username ||
           firstError.confirmPassword ||
-          firstError.name
+          firstError.name ||
+          firstError
       );
       console.log(myError);
     }

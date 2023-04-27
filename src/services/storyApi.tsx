@@ -26,7 +26,7 @@ export const storyApi = createApi({
         method: "POST",
         body: story,
       }),
-      invalidatesTags: ["Story"],
+      invalidatesTags: (result, arg) => (result ? [{ type: "Story" }] : []),
     }),
     updateStory: builder.mutation<void, UpdateStory>({
       query: ({ id, ...rest }) => ({
@@ -34,14 +34,15 @@ export const storyApi = createApi({
         method: "PUT",
         body: rest,
       }),
-      invalidatesTags: ["Story"],
+      // invalidatesTags: ["Story"],
+      invalidatesTags: (result, arg) => (result ? [{ type: "Story" }] : []),
     }),
     deleteStory: builder.mutation<void, number>({
       query: (id) => ({
         url: `/stories/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Story"],
+      invalidatesTags: (result, arg) => (result ? [{ type: "Story" }] : []),
     }),
   }),
 });
