@@ -42,6 +42,7 @@ export const storyApi = createApi({
         url: `/stories/${id}`,
         method: "DELETE",
       }),
+      // invalidatesTags: ["Story"],
       invalidatesTags: (result, arg) => (result ? [{ type: "Story" }] : []),
     }),
   }),
