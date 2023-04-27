@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, TextareaAutosize, Button, CircularProgress } from "@mui/material";
+import { Box, TextareaAutosize, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactDom from "react-dom";
 import { my_modal, text_area } from "./style";
@@ -96,7 +96,6 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
           Cancel
         </Button>
       </Box>
-      {/* {error && <ShowErrorAlert message={error!} />} */}
     </Box>,
     document.getElementById("portal")!
   );

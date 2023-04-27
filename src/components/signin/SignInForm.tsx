@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Button, Grid, Box, Typography, Alert } from "@mui/material";
+import { Grid, Box, Typography, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
 import { setUser } from "../../features/authSlice";

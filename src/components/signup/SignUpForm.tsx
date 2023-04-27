@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { Button, Grid, Box, Typography, Alert } from "@mui/material";
+import { Grid, Box, Typography, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { FormInputField } from "../generic/FormInputField";
 import { useSignUpMutation } from "../../services/authApi";
@@ -63,7 +63,6 @@ export const SignUpForm: FC = () => {
           firstError.name ||
           firstError
       );
-      console.log(myError);
     }
   };
 
