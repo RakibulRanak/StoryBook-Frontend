@@ -68,6 +68,7 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
           minRows={2}
           placeholder="Title"
           id="outlined-multiline-static"
+          data-testid="title"
           style={{ resize: "vertical", width: "100%" }}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -77,6 +78,7 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
           placeholder="Story"
           style={text_area}
           id="outlined-multiline-static"
+          data-testid="story"
           value={story}
           onChange={(e) => setStory(e.target.value)}
         />

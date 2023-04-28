@@ -5,10 +5,11 @@ import { Provider } from "react-redux";
 import ReactDom from "react-dom";
 import "@testing-library/jest-dom/extend-expect";
 //import { render } from "@testing-library/react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
 // Mock getElementById to return a fake element
 
+const handelUpdateSubmit = jest.fn();
 const close = jest.fn();
 
 const noStoryDataProps = {
@@ -52,18 +53,26 @@ describe("Render StoryModal", () => {
     expect(close).toHaveBeenCalled();
   });
 
-  //   test("Update a Story using StoryModal", () => {
-  //     setUpTest(updateStoryProps);
-  //     const submitButton = screen.getByRole("button", { name: "UPDATE" });
+  test("Render StoryModal in Update mode with title and story", () => {
+    setUpTest(updateStoryProps);
+    expect(screen.getByRole("button", { name: "UPDATE" })).toBeInTheDocument();
+    expect(screen.getByTestId("title")).toBeInTheDocument();
+    expect(screen.getByTestId("title").innerHTML).toBe("test story updated");
+    expect(screen.getByTestId("story")).toBeInTheDocument();
+    expect(screen.getByTestId("story").innerHTML).toBe(
+      "this is the updated test story"
+    );
+  });
+
+  // test("Render StoryModal in Update mode and Update action is called", async () => {
+  //   setUpTest(updateStoryProps);
+  //   const submitButton = screen.getByRole("button", { name: "UPDATE" });
+
+  //   await waitFor(() => {
   //     fireEvent.click(submitButton);
-  //     //console.log(store.getState().story.storyList);
-  //     expect(store.getState().story.storyList[0].title).toBe(
-  //       updateStoryProps.title
-  //     );
-  //     expect(store.getState().story.storyList[0].story).toBe(
-  //       updateStoryProps.story
-  //     );
   //   });
+  //   expect(handelUpdateSubmit).toHaveBeenCalled();
+  // });
 
   //   test("Post a story using StoryModal", () => {
   //     setUpTest(noStoryDataProps);

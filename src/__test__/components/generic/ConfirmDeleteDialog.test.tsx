@@ -3,7 +3,7 @@ import { ConfirmDeleteDialog } from "../../../components/generic/ConfirmDeleteDi
 
 import "@testing-library/jest-dom/extend-expect";
 //import { render } from "@testing-library/react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
 const close = jest.fn();
@@ -18,12 +18,20 @@ describe("Render StoryModal", () => {
     );
   };
 
-  test("Successful Render and Close of ConfirmDeleteDialog", () => {
+  test("Successful Render, Submit button calling, and auto close of ConfirmDeleteDialog", async () => {
     setUpTest();
     const deleteButton = screen.getByText("Delete");
     expect(deleteButton).toBeInTheDocument();
-    fireEvent.click(deleteButton);
-    expect(close).toHaveBeenCalled();
+    await waitFor(() => fireEvent.click(deleteButton));
     expect(submit).toHaveBeenCalled();
+    expect(close).toHaveBeenCalled();
+  });
+
+  test("Render and Close of ConfirmDeleteDialog", async () => {
+    setUpTest();
+    const closeButton = screen.getByText("Cancel");
+    expect(closeButton).toBeInTheDocument();
+    fireEvent.click(closeButton);
+    expect(close).toHaveBeenCalled();
   });
 });
