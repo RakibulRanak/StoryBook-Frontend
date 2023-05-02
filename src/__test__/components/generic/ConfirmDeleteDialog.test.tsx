@@ -1,8 +1,6 @@
 import React from "react";
 import { ConfirmDeleteDialog } from "../../../components/generic/ConfirmDeleteDialog";
-
 import "@testing-library/jest-dom/extend-expect";
-//import { render } from "@testing-library/react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
