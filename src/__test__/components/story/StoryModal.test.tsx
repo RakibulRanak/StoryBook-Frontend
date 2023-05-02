@@ -1,6 +1,6 @@
 import React from "react";
 import { StoryModal } from "../../../components/story/StoryModal";
-import { store } from "../../../app/store";
+import { setupStore } from "../../../app/store";
 import { Provider } from "react-redux";
 import ReactDom from "react-dom";
 import "@testing-library/jest-dom/extend-expect";
@@ -39,7 +39,7 @@ describe("Render StoryModal", () => {
   });
   const setUpTest = (data: any): void => {
     render(
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <StoryModal {...data} />
       </Provider>
     );

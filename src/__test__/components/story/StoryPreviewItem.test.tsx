@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { StoryPreviewItem } from "../../../components/story/StoryPreviewItem";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "../../../app/store";
+import { setupStore } from "../../../app/store";
 import { Provider } from "react-redux";
 
 const testStory = {
@@ -16,7 +16,7 @@ const testStory = {
 describe("renders story preview item correctly", () => {
   const setupTest = (): void => {
     render(
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <BrowserRouter>
           <StoryPreviewItem {...testStory} />
         </BrowserRouter>

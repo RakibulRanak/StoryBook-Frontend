@@ -1,5 +1,5 @@
 import { AuthenticatedStoryActions } from "../../../components/story/AuthenticatedStoryActions";
-import { store } from "../../../app/store";
+import { setupStore } from "../../../app/store";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
@@ -43,7 +43,7 @@ const testStory2 = {
 describe("Render AuthencitedStoryActions", () => {
   const setUpTest = (testStory: any): void => {
     render(
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <AuthenticatedStoryActions {...testStory}></AuthenticatedStoryActions>
       </Provider>
     );

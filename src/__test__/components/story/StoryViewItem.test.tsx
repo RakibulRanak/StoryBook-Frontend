@@ -2,14 +2,14 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { StoryViewItem } from "../../../components/story/StoryViewItem";
 
-import { store } from "../../../app/store";
+import { setupStore } from "../../../app/store";
 import { Provider } from "react-redux";
 
 describe("StoryViewItem component", () => {
   //const cashedQueries = store.getState().storyApi.queries;
   const setupTest = (id: number): void => {
     render(
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <StoryViewItem id={id} />
       </Provider>
     );

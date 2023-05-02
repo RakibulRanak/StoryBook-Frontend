@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { SignUp } from "../../pages/SignUp";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "../../app/store";
+import { setupStore } from "../../app/store";
 import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
@@ -10,7 +10,7 @@ import "@testing-library/jest-dom/extend-expect";
 describe("SignUp component", () => {
   const setupTest = (): void => {
     render(
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <BrowserRouter>
           <SignUp />
         </BrowserRouter>

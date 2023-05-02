@@ -1,12 +1,14 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Navbar } from "../../../components/generic/Navbar";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "../../../app/store";
+import { setupStore } from "../../../app/store";
 import { Provider } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../../app/hook";
 import { RootState } from "../../../app/store";
 // import { signIn } from "../../../features/authSlice";
 import { useSignInMutation } from "../../../services/authApi";
+
+const store = setupStore();
 
 describe("Navbar", () => {
   const user = {

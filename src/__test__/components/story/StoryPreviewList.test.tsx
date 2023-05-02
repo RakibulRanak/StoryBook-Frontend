@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { store } from "../../../app/store";
+import { setupStore } from "../../../app/store";
 import { Provider } from "react-redux";
 import { StoryPreviewList } from "../../../components/story/StoryPreviewList";
 import { BrowserRouter } from "react-router-dom";
@@ -8,7 +8,7 @@ import storyList from "../../../storage/stories.json";
 describe("StoryPreviewList", () => {
   it("renders a loading message when stories are loading", () => {
     render(
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <BrowserRouter>
           <StoryPreviewList />
         </BrowserRouter>
