@@ -42,6 +42,7 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
       props.close();
     } catch (e) {
       setError("Something Went Wrong! Try Again Later");
+      setTimeout(() => props.close(), 3000);
     }
   };
 
@@ -53,6 +54,7 @@ export const StoryModal: FC<StoryModalProps> = (props) => {
       props.close();
     } catch (e) {
       setError("Something Went Wrong! Try Again Later");
+      setTimeout(() => props.close(), 3000);
     }
   };
 
