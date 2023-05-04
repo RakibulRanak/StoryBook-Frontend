@@ -1,22 +1,12 @@
+import "whatwg-fetch";
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { Home } from "../../pages/Home";
-import { BrowserRouter } from "react-router-dom";
-import { setupStore } from "../../app/store";
-import { Provider } from "react-redux";
+import { renderWithProviders } from "../test-utils";
 
 describe("<HomePage />", () => {
   test("renders correctly", async () => {
-    render(
-      <Provider store={setupStore()}>
-        <BrowserRouter>
-          {" "}
-          <Home />
-        </BrowserRouter>
-      </Provider>
-    );
-    // expect(
-    //   await screen.findByText("The Adventures of Sherlock Holmes")
-    // ).toBeInTheDocument();
+    renderWithProviders(<Home />);
+    expect(await screen.findByText("Hello World")).toBeInTheDocument();
   });
 });
