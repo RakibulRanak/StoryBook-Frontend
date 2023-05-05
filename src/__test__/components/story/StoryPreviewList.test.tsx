@@ -1,5 +1,5 @@
 import "whatwg-fetch";
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { StoryPreviewList } from "../../../components/story/StoryPreviewList";
 import { renderWithProviders } from "../../test-utils";
 

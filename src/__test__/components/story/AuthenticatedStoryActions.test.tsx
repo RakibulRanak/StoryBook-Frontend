@@ -1,12 +1,11 @@
 import React from "react";
 import { AuthenticatedStoryActions } from "../../../components/story/AuthenticatedStoryActions";
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { StoryModal } from "../../../components/story/StoryModal";
 import { ConfirmDeleteDialog } from "../../../components/generic/ConfirmDeleteDialog";
 import { renderWithProviders } from "../../test-utils";
-import { wait } from "@testing-library/user-event/dist/utils";
 
 jest.mock("../../../components/story/StoryModal", () => {
   return {

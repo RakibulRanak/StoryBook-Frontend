@@ -2,9 +2,8 @@ import React from "react";
 import { StoryModal } from "../../../components/story/StoryModal";
 import "@testing-library/jest-dom/extend-expect";
 //import { render } from "@testing-library/react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { renderWithProviders } from "../../test-utils";
-import { setupStore } from "../../../app/store";
 
 // Mock getElementById to return a fake element
 

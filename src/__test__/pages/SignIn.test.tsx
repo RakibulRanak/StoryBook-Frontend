@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  render,
   fireEvent,
   screen,
-  getByText,
   waitFor,
 } from "@testing-library/react";
 import { SignIn } from "../../pages/SignIn";
