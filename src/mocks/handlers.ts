@@ -10,13 +10,44 @@ const handlers = [
         message : "Story updated successfully",
         data: {
             id: 1,
-            title: "test story updated",
-            story: "Updated test post",
+            title: "test story 2",
+            story: "this is a test story 2",
             author: "RakibulRanak",
             postedAt: "2023-04-18T14:36:23.352Z"
         }
     }
+    console.log("update")
       return res(ctx.delay(500),ctx.status(200),ctx.json(mockApiResponse));
+    }
+  ),
+    // delete story
+    rest.delete(
+      `https://story-hub-backend-5v21.onrender.com/api/v1/stories/1`,
+      (req, res, ctx) => {
+        const mockApiResponse = {
+          status : "Success",
+          message : "Story deleted successfully"
+      }
+      console.log("update")
+        return res(ctx.delay(500),ctx.status(200),ctx.json(mockApiResponse));
+      }
+    ),
+
+    // get a story
+  rest.get(
+    `https://story-hub-backend-5v21.onrender.com/api/v1/stories/1`,
+    (req, res, ctx) => {
+      const mockApiResponse = {
+        message: "Stories fetched successfully",
+        data: {
+            id: 1,
+            title: "mock story",
+            story: "Hello World",
+            author: "durjoy",
+            postedAt: "2023-05-03T07:28:27.477Z"
+        },
+      };
+      return res(ctx.delay(500),ctx.status(200), ctx.json(mockApiResponse));
     }
   ),
   // post story
@@ -62,23 +93,7 @@ const handlers = [
       return res(ctx.delay(500),ctx.status(200), ctx.json(mockApiResponse));
     }
   ),
-// get a story
-  rest.get(
-    `https://story-hub-backend-5v21.onrender.com/api/v1/stories/1`,
-    (req, res, ctx) => {
-      const mockApiResponse = {
-        message: "Stories fetched successfully",
-        data: {
-            id: 1,
-            title: "mock story",
-            story: "Hello World",
-            author: "durjoy",
-            postedAt: "2023-05-03T07:28:27.477Z"
-        },
-      };
-      return res(ctx.delay(500),ctx.status(200), ctx.json(mockApiResponse));
-    }
-  ),
+
 
   // sign in
   rest.post(

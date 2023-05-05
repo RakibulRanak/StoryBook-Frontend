@@ -1,11 +1,12 @@
 import React from "react";
 import { AuthenticatedStoryActions } from "../../../components/story/AuthenticatedStoryActions";
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { StoryModal } from "../../../components/story/StoryModal";
 import { ConfirmDeleteDialog } from "../../../components/generic/ConfirmDeleteDialog";
 import { renderWithProviders } from "../../test-utils";
+import { wait } from "@testing-library/user-event/dist/utils";
 
 jest.mock("../../../components/story/StoryModal", () => {
   return {
@@ -33,12 +34,21 @@ const testStory1 = {
 const testStory2 = {
   author: "RakibulRanak",
   id: 1,
-  title: "test story",
-  story: "this is a test story",
+  title: "test story 2",
+  story: "this is a test story 2",
   postedAt: "some date",
 };
 
 describe("Render AuthencitedStoryActions", () => {
+  beforeEach(() => {
+    const root = document.createElement("div");
+    const portal = document.createElement("div");
+    root.setAttribute("id", "root");
+    portal.setAttribute("id", "portal");
+    document.body.appendChild(root);
+    document.body.appendChild(portal);
+  });
+
   const setUpTest = (testStory: any): void => {
     renderWithProviders(
       <AuthenticatedStoryActions {...testStory}></AuthenticatedStoryActions>,
@@ -47,7 +57,7 @@ describe("Render AuthencitedStoryActions", () => {
           auth: {
             username: "RakibulRanak",
             loggedIn: true,
-            access_token: "k",
+            access_token: "kaaaa",
           },
         },
       }
@@ -78,13 +88,44 @@ describe("Render AuthencitedStoryActions", () => {
     expect(deleteButton).toBeInTheDocument();
   });
 
-  test("Successful button click action of edit and delete", () => {
+  // test("Successful button click real action of edit", async () => {
+  //   setUpTest(testStory2);
+
+  //   const editButton = screen.getByTestId("EditIcon");
+  //   const deleteButton = screen.getByTestId("DeleteIcon");
+
+  //   fireEvent.click(editButton);
+  //   await waitFor(() => {
+  //     expect(screen.getByText("test story 2")).toBeInTheDocument();
+  //     expect(screen.getByText("UPDATE")).toBeInTheDocument();
+  //   });
+  //   const updateButton = screen.getByText("UPDATE");
+  //   fireEvent.click(updateButton);
+  //   await waitFor(() => {
+  //     expect(screen.queryByText("test story 2")).toBeInTheDocument();
+  //   });
+  // });
+
+  // test("Successful button click real action of delete", async () => {
+  //   setUpTest(testStory2);
+  //   const deleteIcon = screen.getByTestId("DeleteIcon");
+  //   fireEvent.click(deleteIcon);
+  //   await waitFor(() => {
+  //     expect(screen.getByText("Delete")).toBeInTheDocument();
+  //   });
+  //   const confirmDeleteButton = screen.getByText("Delete");
+  //   fireEvent.click(confirmDeleteButton);
+  //   await waitFor(() => {
+  //     expect(screen.queryByText("test story 2")).not.toBeInTheDocument();
+  //   });
+  // });
+
+  test("Successful button click mock action of edit and delete", () => {
     act(() => {
       setUpTest(testStory2);
     });
     const editButton = screen.getByTestId("EditIcon");
     const deleteButton = screen.getByTestId("DeleteIcon");
-
     fireEvent.click(editButton);
     expect(StoryModal).toHaveBeenCalledWith(
       {
