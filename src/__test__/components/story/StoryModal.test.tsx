@@ -1,15 +1,14 @@
 import React from "react";
 import { StoryModal } from "../../../components/story/StoryModal";
-import { setupStore } from "../../../app/store";
-import { Provider } from "react-redux";
-import ReactDom from "react-dom";
 import "@testing-library/jest-dom/extend-expect";
 //import { render } from "@testing-library/react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { renderWithProviders } from "../../test-utils";
+import { setupStore } from "../../../app/store";
 
 // Mock getElementById to return a fake element
 
-const handelUpdateSubmit = jest.fn();
+// const handelUpdateSubmit = jest.fn();
 const close = jest.fn();
 
 const noStoryDataProps = {
@@ -17,8 +16,8 @@ const noStoryDataProps = {
 };
 
 const updateStoryProps = {
-  title: "test story updated",
-  story: "this is the updated test story",
+  title: "test story",
+  story: "this is the test story",
   id: 1,
   close,
 };
@@ -37,12 +36,17 @@ describe("Render StoryModal", () => {
     document.body.appendChild(root);
     document.body.appendChild(portal);
   });
+
   const setUpTest = (data: any): void => {
-    render(
-      <Provider store={setupStore()}>
-        <StoryModal {...data} />
-      </Provider>
-    );
+    renderWithProviders(<StoryModal {...data}></StoryModal>, {
+      preloadedState: {
+        auth: {
+          username: "RakibulRanak",
+          loggedIn: true,
+          access_token: "k",
+        },
+      },
+    });
   };
 
   test("Successful Render and Close of StoryModal", () => {
@@ -57,40 +61,38 @@ describe("Render StoryModal", () => {
     setUpTest(updateStoryProps);
     expect(screen.getByRole("button", { name: "UPDATE" })).toBeInTheDocument();
     expect(screen.getByTestId("title")).toBeInTheDocument();
-    expect(screen.getByTestId("title").innerHTML).toBe("test story updated");
+    expect(screen.getByTestId("title").innerHTML).toBe("test story");
     expect(screen.getByTestId("story")).toBeInTheDocument();
     expect(screen.getByTestId("story").innerHTML).toBe(
-      "this is the updated test story"
+      "this is the test story"
     );
   });
 
-  // test("Render StoryModal in Update mode and Update action is called", async () => {
-  //   setUpTest(updateStoryProps);
-  //   const submitButton = screen.getByRole("button", { name: "UPDATE" });
+  test("Render StoryModal in Update mode and Update action is called", async () => {
+    setUpTest(updateStoryProps);
+    const submitButton = screen.getByRole("button", { name: "UPDATE" });
+    fireEvent.click(submitButton);
+    await waitFor(() => {
+      expect(screen.getByText("test story")).toBeInTheDocument();
+    });
+  });
 
-  //   await waitFor(() => {
-  //     fireEvent.click(submitButton);
-  //   });
-  //   expect(handelUpdateSubmit).toHaveBeenCalled();
-  // });
+  test("Post a story using StoryModal", async () => {
+    setUpTest(noStoryDataProps);
 
-  //   test("Post a story using StoryModal", () => {
-  //     setUpTest(noStoryDataProps);
+    fireEvent.change(screen.getByPlaceholderText("Title"), {
+      target: { value: postStoryData.title },
+    });
 
-  //     fireEvent.change(screen.getByPlaceholderText("Title"), {
-  //       target: { value: postStoryData.title },
-  //     });
-
-  //     fireEvent.change(screen.getByPlaceholderText("Story"), {
-  //       target: {
-  //         value: postStoryData.story,
-  //       },
-  //     });
-  //     const submitButton = screen.getByRole("button", { name: "POST" });
-  //     fireEvent.click(submitButton);
-
-  //     expect(store.getState().story.storyList[0].title).toBe(postStoryData.title);
-  //     expect(store.getState().story.storyList[0].story).toBe(postStoryData.story);
-  //   });
+    fireEvent.change(screen.getByPlaceholderText("Story"), {
+      target: {
+        value: postStoryData.story,
+      },
+    });
+    const submitButton = screen.getByRole("button", { name: "POST" });
+    fireEvent.click(submitButton);
+    await waitFor(() => {
+      expect(screen.getByText("Test Story Posting")).toBeInTheDocument();
+    });
+  });
 });
-// export {};

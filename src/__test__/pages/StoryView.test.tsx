@@ -1,12 +1,12 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { StoryView } from "../../pages/StoryView";
 import { setupStore } from "../../app/store";
 import { Provider } from "react-redux";
 
 describe("StoryView", () => {
-  it("should display the correct story", () => {
+  it("should display the correct story", async () => {
     render(
       <Provider store={setupStore()}>
         <MemoryRouter initialEntries={[`/stories/1`]}>
@@ -16,8 +16,8 @@ describe("StoryView", () => {
         </MemoryRouter>
       </Provider>
     );
-    // expect(
-    //   screen.getByText("The Adventures of Sherlock Holmes")
-    // ).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("mock story")).toBeInTheDocument();
+    });
   });
 });
