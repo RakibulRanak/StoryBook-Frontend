@@ -22,5 +22,6 @@ export function renderWithProviders(
       </BrowserRouter>
     );
   }
+
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }
