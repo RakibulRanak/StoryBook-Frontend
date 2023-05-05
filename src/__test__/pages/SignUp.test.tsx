@@ -1,75 +1,60 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { SignUp } from "../../pages/SignUp";
 import { BrowserRouter } from "react-router-dom";
 import { setupStore } from "../../app/store";
 import { Provider } from "react-redux";
-import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
+import { renderWithProviders } from "../test-utils";
 
 describe("SignUp component", () => {
-  const setupTest = (): void => {
-    render(
-      <Provider store={setupStore()}>
-        <BrowserRouter>
-          <SignUp />
-        </BrowserRouter>
-      </Provider>
-    );
-  };
-
   test("renders correctly", () => {
-    setupTest();
+    renderWithProviders(<SignUp />);
     expect(screen.getByTestId("usernameInput")).toBeInTheDocument();
     expect(screen.getByTestId("passwordInput")).toBeInTheDocument();
     expect(screen.getByTestId("nameInput")).toBeInTheDocument();
     expect(screen.getByTestId("emailInput")).toBeInTheDocument();
     expect(screen.getByTestId("confirmpasswordInput")).toBeInTheDocument();
-    //expect(getByText("Username *")).toBeInTheDocument();
   });
 
   test("shows sign in link", () => {
-    setupTest();
+    renderWithProviders(<SignUp />);
     const signInLink = screen.getByText("Already have an account? Sign in");
     expect(signInLink).toBeInTheDocument();
   });
 
   test("Go to Sign in page when clicked", () => {
-    setupTest();
+    renderWithProviders(<SignUp />);
     const signInLink = screen.getByText("Already have an account? Sign in");
     expect(signInLink).toBeInTheDocument();
     fireEvent.click(signInLink);
     expect(window.location.pathname).toBe("/signin");
   });
 
-  //   test("Increase user array size when submit button is clicked", () => {
-  //     const mockConsoleLog = jest.spyOn(console, "log").mockImplementation();
-  //     setupTest();
-  //     fireEvent.change(screen.getByLabelText("Name *"), {
-  //       target: { value: "John Doe" },
-  //     });
+  test("Go to sign in page automatically when sign up completed", async () => {
+    renderWithProviders(<SignUp />);
+    fireEvent.change(screen.getByLabelText("Name *"), {
+      target: { value: "John Doe" },
+    });
 
-  //     fireEvent.change(screen.getByLabelText("Username *"), {
-  //       target: { value: "johndoe" },
-  //     });
+    fireEvent.change(screen.getByLabelText("Username *"), {
+      target: { value: "johndoe" },
+    });
 
-  //     fireEvent.change(screen.getByLabelText("Email *"), {
-  //       target: { value: "johndoe@example.com" },
-  //     });
+    fireEvent.change(screen.getByLabelText("Email *"), {
+      target: { value: "johndoe@examplecom" },
+    });
 
-  //     fireEvent.change(screen.getByLabelText("Password *"), {
-  //       target: { value: "password" },
-  //     });
+    fireEvent.change(screen.getByLabelText("Password *"), {
+      target: { value: "password" },
+    });
 
-  //     fireEvent.change(screen.getByLabelText("Confirm Password *"), {
-  //       target: { value: "password" },
-  //     });
-
-  //     const prevSize = store.getState().auth.users.length;
-  //     fireEvent.submit(screen.getByRole("button", { name: "Sign Up" }));
-  //     const curSize = store.getState().auth.users.length;
-
-  //     expect(curSize).toBe(prevSize + 1);
-  //   });
+    fireEvent.change(screen.getByLabelText("Confirm Password *"), {
+      target: { value: "password" },
+    });
+    fireEvent.submit(screen.getByRole("button", { name: "Sign Up" }));
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/signin");
+    });
+  });
 });
-// export {};

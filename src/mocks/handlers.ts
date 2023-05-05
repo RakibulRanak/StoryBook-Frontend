@@ -24,9 +24,30 @@ const handlers = [
           },
         ],
       };
-      return res(ctx.status(200), ctx.json(mockApiResponse));
+      return res(ctx.delay(500),ctx.status(200), ctx.json(mockApiResponse));
     }
   ),
+  rest.post(
+    `https://story-hub-backend-5v21.onrender.com/api/v1/users/login`,
+    (req, res, ctx) => {
+      const mockApiResponse = {
+          data : {
+              "access_token": "eyJhbGciOiJIUzI1NiIsInRL.....",
+              "refresh_token": "eyJhbGciOiJIUzI1Np1tAkc8....."
+          }
+      };
+      return res(ctx.delay(500),ctx.status(201));
+    }
+  ),
+
+  rest.post(
+    `https://story-hub-backend-5v21.onrender.com/api/v1/users`,
+    (req, res, ctx) => {
+      return res(ctx.delay(500),ctx.status(201));
+    }
+  ),
+
+
 ];
 
 export { handlers };

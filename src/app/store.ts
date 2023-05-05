@@ -17,4 +17,5 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>)=> configu
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppDispatch = typeof rootReducer.dispatch;
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']

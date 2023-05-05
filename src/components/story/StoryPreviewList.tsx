@@ -8,6 +8,7 @@ import { ShowErrorAlert } from "../generic/ShowErrorAlert";
 
 const renderLoading = () => (
   <Box
+    data-testid="progress-bar"
     sx={{
       width: "100%",
       textAlign: "center",

@@ -6,6 +6,7 @@ import { renderWithProviders } from "../../test-utils";
 describe("StoryPreviewList", () => {
   it("renders a loading message when stories are loading", () => {
     renderWithProviders(<StoryPreviewList />);
+    expect(screen.getByTestId("progress-bar")).toBeInTheDocument();
   });
 
   it("renders a list of story previews when stories are loaded", async () => {
