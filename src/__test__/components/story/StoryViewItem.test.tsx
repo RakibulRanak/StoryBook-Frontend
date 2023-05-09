@@ -5,6 +5,7 @@ import { server } from "../../../mocks/server";
 import { rest } from "msw";
 import { setupStore } from "../../../app/store";
 import { Provider } from "react-redux";
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
 describe("StoryViewItem component", () => {
   //const cashedQueries = store.getState().storyApi.queries;
@@ -25,18 +26,15 @@ describe("StoryViewItem component", () => {
 
   test("renders an error message if the story is not found", async () => {
     server.use(
-      rest.get(
-        `https://story-hub-backend-5v21.onrender.com/api/v1/stories/10000`,
-        (req, res, ctx) => {
-          return res(
-            ctx.status(404),
-            ctx.json({
-              status: "fail",
-              message: "Story not found",
-            })
-          );
-        }
-      )
+      rest.get(`${baseUrl}/stories/10000`, (req, res, ctx) => {
+        return res(
+          ctx.status(404),
+          ctx.json({
+            status: "fail",
+            message: "Story not found",
+          })
+        );
+      })
     );
     setupTest(10000);
     await waitFor(() => {
