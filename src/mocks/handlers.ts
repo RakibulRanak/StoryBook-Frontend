@@ -1,10 +1,10 @@
 import { rest } from "msw";
-//const baseUrl = process.env.REACT_APP_BACKEND_URL;
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
 const handlers = [
   // update story
   rest.put(
-    `https://story-hub-backend-5v21.onrender.com/api/v1/stories/1`,
+    `${baseUrl}/stories/1`,
     (req, res, ctx) => {
       const mockApiResponse = {
         message : "Story updated successfully",
@@ -16,13 +16,12 @@ const handlers = [
             postedAt: "2023-04-18T14:36:23.352Z"
         }
     }
-    console.log("update")
       return res(ctx.delay(500),ctx.status(200),ctx.json(mockApiResponse));
     }
   ),
     // delete story
     rest.delete(
-      `https://story-hub-backend-5v21.onrender.com/api/v1/stories/1`,
+      `${baseUrl}/stories/1`,
       (req, res, ctx) => {
         const mockApiResponse = {
           status : "Success",
@@ -35,7 +34,7 @@ const handlers = [
 
     // get a story
   rest.get(
-    `https://story-hub-backend-5v21.onrender.com/api/v1/stories/1`,
+    `${baseUrl}/stories/1`,
     (req, res, ctx) => {
       const mockApiResponse = {
         message: "Stories fetched successfully",
@@ -52,7 +51,7 @@ const handlers = [
   ),
   // post story
   rest.post(
-    `https://story-hub-backend-5v21.onrender.com/api/v1/stories/`,
+    `${baseUrl}/stories/`,
     (req, res, ctx) => {
       const mockApiResponse = {
         message : "Story created successfully",
@@ -69,7 +68,7 @@ const handlers = [
   ),
   // get stories
   rest.get(
-    `https://story-hub-backend-5v21.onrender.com/api/v1/stories`,
+    `${baseUrl}/stories`,
     (req, res, ctx) => {
       const mockApiResponse = {
         message: "Stories fetched successfully",
@@ -97,7 +96,7 @@ const handlers = [
 
   // sign in
   rest.post(
-    `https://story-hub-backend-5v21.onrender.com/api/v1/users/login`,
+    `${baseUrl}/users/login`,
     (req, res, ctx) => {
       const mockApiResponse = {
           data : {
@@ -110,7 +109,7 @@ const handlers = [
   ),
 // sign up
   rest.post(
-    `https://story-hub-backend-5v21.onrender.com/api/v1/users`,
+    `${baseUrl}/users`,
     (req, res, ctx) => {
       return res(ctx.delay(500),ctx.status(201));
     }
